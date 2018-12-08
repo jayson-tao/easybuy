@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="easybuy_protal:war">
+    <output-path>$PROJECT_DIR$/easybuy_protal/target</output-path>
+    <root id="archive" name="easybuy_protal.war">
+      <element id="artifact" artifact-name="easybuy_protal:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/easybuy_common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easybuy_manager" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easybuy_manager/easybuy_manager_dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easybuy_manager/easybuy_manager_pojo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easybuy_manager/easybuy_manager_service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easybuy_manager/easybuy_manager_web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easybuy_parent" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easybuy_protal" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easybuy_rest" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easybuy_service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easybuy_user" charset="UTF-8" />
+  </component>
+</project>

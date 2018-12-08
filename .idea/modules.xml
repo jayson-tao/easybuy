@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/easybuy_common/easybuy_common.iml" filepath="$PROJECT_DIR$/easybuy_common/easybuy_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easybuy_manager/easybuy_manager.iml" filepath="$PROJECT_DIR$/easybuy_manager/easybuy_manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easybuy_manager/easybuy_manager_dao/easybuy_manager_dao.iml" filepath="$PROJECT_DIR$/easybuy_manager/easybuy_manager_dao/easybuy_manager_dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easybuy_manager/easybuy_manager_pojo/easybuy_manager_pojo.iml" filepath="$PROJECT_DIR$/easybuy_manager/easybuy_manager_pojo/easybuy_manager_pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easybuy_manager/easybuy_manager_service/easybuy_manager_service.iml" filepath="$PROJECT_DIR$/easybuy_manager/easybuy_manager_service/easybuy_manager_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easybuy_manager/easybuy_manager_web/easybuy_manager_web.iml" filepath="$PROJECT_DIR$/easybuy_manager/easybuy_manager_web/easybuy_manager_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easybuy_parent/easybuy_parent.iml" filepath="$PROJECT_DIR$/easybuy_parent/easybuy_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easybuy_protal/easybuy_protal.iml" filepath="$PROJECT_DIR$/easybuy_protal/easybuy_protal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easybuy_rest/easybuy_rest.iml" filepath="$PROJECT_DIR$/easybuy_rest/easybuy_rest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easybuy_service/easybuy_service.iml" filepath="$PROJECT_DIR$/easybuy_service/easybuy_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easybuy_user/easybuy_user.iml" filepath="$PROJECT_DIR$/easybuy_user/easybuy_user.iml" />
+    </modules>
+  </component>
+</project>
