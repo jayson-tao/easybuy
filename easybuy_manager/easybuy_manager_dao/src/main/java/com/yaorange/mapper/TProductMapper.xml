@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaorange.mapper.TProductMapper">
+    <resultMap id="BaseResultMap" type="com.yaorange.pojo.TProduct">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="update_time" property="updateTime" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="sub_name" property="subName" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="CHAR"/>
+        <result column="product_type" property="productType" jdbcType="BIGINT"/>
+        <result column="on_sale_time" property="onSaleTime" jdbcType="BIGINT"/>
+        <result column="off_sale_time" property="offSaleTime" jdbcType="BIGINT"/>
+        <result column="brand_id" property="brandId" jdbcType="BIGINT"/>
+        <result column="state" property="state" jdbcType="TINYINT"/>
+        <result column="max_price" property="maxPrice" jdbcType="INTEGER"/>
+        <result column="min_price" property="minPrice" jdbcType="INTEGER"/>
+        <result column="sale_count" property="saleCount" jdbcType="INTEGER"/>
+        <result column="view_count" property="viewCount" jdbcType="INTEGER"/>
+        <result column="comment_count" property="commentCount" jdbcType="INTEGER"/>
+        <result column="comment_score" property="commentScore" jdbcType="INTEGER"/>
+        <result column="view_properties" property="viewProperties" jdbcType="VARCHAR"/>
+        <result column="good_comment_count" property="goodCommentCount" jdbcType="INTEGER"/>
+        <result column="common_comment_count" property="commonCommentCount" jdbcType="INTEGER"/>
+        <result column="bad_comment_count" property="badCommentCount" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, create_time, update_time, name, sub_name, code, product_type, on_sale_time, off_sale_time,
+    brand_id, state, max_price, min_price, sale_count, view_count, comment_count, comment_score,
+    view_properties, good_comment_count, common_comment_count, bad_comment_count
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yaorange.pojo.TProductExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_product
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <!--批量查询-->
+    <select id="selectByPrimaryKeyBatch" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_product
+        where id in (
+        <foreach collection="list" item="item" separator=",">
+            #{item}
+        </foreach>
+        )
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_product
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.yaorange.pojo.TProductExample">
+        delete from t_product
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.yaorange.pojo.TProduct">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        insert into t_product (id, create_time, update_time,
+        name, sub_name, code, product_type,
+        on_sale_time, off_sale_time, brand_id,
+        state, max_price, min_price,
+        sale_count, view_count, comment_count,
+        comment_score, view_properties, good_comment_count,
+        common_comment_count, bad_comment_count)
+        values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT},
+        #{name,jdbcType=VARCHAR}, #{subName,jdbcType=VARCHAR}, #{code,jdbcType=CHAR}, #{productType,jdbcType=BIGINT},
+        #{onSaleTime,jdbcType=BIGINT}, #{offSaleTime,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT},
+        #{state,jdbcType=TINYINT}, #{maxPrice,jdbcType=INTEGER}, #{minPrice,jdbcType=INTEGER},
+        #{saleCount,jdbcType=INTEGER}, #{viewCount,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER},
+        #{commentScore,jdbcType=INTEGER}, #{viewProperties,jdbcType=VARCHAR}, #{goodCommentCount,jdbcType=INTEGER},
+        #{commonCommentCount,jdbcType=INTEGER}, #{badCommentCount,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.yaorange.pojo.TProduct">
+        insert into t_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="subName != null">
+                sub_name,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="productType != null">
+                product_type,
+            </if>
+            <if test="onSaleTime != null">
+                on_sale_time,
+            </if>
+            <if test="offSaleTime != null">
+                off_sale_time,
+            </if>
+            <if test="brandId != null">
+                brand_id,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="maxPrice != null">
+                max_price,
+            </if>
+            <if test="minPrice != null">
+                min_price,
+            </if>
+            <if test="saleCount != null">
+                sale_count,
+            </if>
+            <if test="viewCount != null">
+                view_count,
+            </if>
+            <if test="commentCount != null">
+                comment_count,
+            </if>
+            <if test="commentScore != null">
+                comment_score,
+            </if>
+            <if test="viewProperties != null">
+                view_properties,
+            </if>
+            <if test="goodCommentCount != null">
+                good_comment_count,
+            </if>
+            <if test="commonCommentCount != null">
+                common_comment_count,
+            </if>
+            <if test="badCommentCount != null">
+                bad_comment_count,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="subName != null">
+                #{subName,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=CHAR},
+            </if>
+            <if test="productType != null">
+                #{productType,jdbcType=BIGINT},
+            </if>
+            <if test="onSaleTime != null">
+                #{onSaleTime,jdbcType=BIGINT},
+            </if>
+            <if test="offSaleTime != null">
+                #{offSaleTime,jdbcType=BIGINT},
+            </if>
+            <if test="brandId != null">
+                #{brandId,jdbcType=BIGINT},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=TINYINT},
+            </if>
+            <if test="maxPrice != null">
+                #{maxPrice,jdbcType=INTEGER},
+            </if>
+            <if test="minPrice != null">
+                #{minPrice,jdbcType=INTEGER},
+            </if>
+            <if test="saleCount != null">
+                #{saleCount,jdbcType=INTEGER},
+            </if>
+            <if test="viewCount != null">
+                #{viewCount,jdbcType=INTEGER},
+            </if>
+            <if test="commentCount != null">
+                #{commentCount,jdbcType=INTEGER},
+            </if>
+            <if test="commentScore != null">
+                #{commentScore,jdbcType=INTEGER},
+            </if>
+            <if test="viewProperties != null">
+                #{viewProperties,jdbcType=VARCHAR},
+            </if>
+            <if test="goodCommentCount != null">
+                #{goodCommentCount,jdbcType=INTEGER},
+            </if>
+            <if test="commonCommentCount != null">
+                #{commonCommentCount,jdbcType=INTEGER},
+            </if>
+            <if test="badCommentCount != null">
+                #{badCommentCount,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.yaorange.pojo.TProductExample" resultType="java.lang.Integer">
+        select count(*) from t_product
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+
+
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_product
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=BIGINT},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=BIGINT},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.subName != null">
+                sub_name = #{record.subName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.code != null">
+                code = #{record.code,jdbcType=CHAR},
+            </if>
+            <if test="record.productType != null">
+                product_type = #{record.productType,jdbcType=BIGINT},
+            </if>
+            <if test="record.onSaleTime != null">
+                on_sale_time = #{record.onSaleTime,jdbcType=BIGINT},
+            </if>
+            <if test="record.offSaleTime != null">
+                off_sale_time = #{record.offSaleTime,jdbcType=BIGINT},
+            </if>
+            <if test="record.brandId != null">
+                brand_id = #{record.brandId,jdbcType=BIGINT},
+            </if>
+            <if test="record.state != null">
+                state = #{record.state,jdbcType=TINYINT},
+            </if>
+            <if test="record.maxPrice != null">
+                max_price = #{record.maxPrice,jdbcType=INTEGER},
+            </if>
+            <if test="record.minPrice != null">
+                min_price = #{record.minPrice,jdbcType=INTEGER},
+            </if>
+            <if test="record.saleCount != null">
+                sale_count = #{record.saleCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.viewCount != null">
+                view_count = #{record.viewCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.commentCount != null">
+                comment_count = #{record.commentCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.commentScore != null">
+                comment_score = #{record.commentScore,jdbcType=INTEGER},
+            </if>
+            <if test="record.viewProperties != null">
+                view_properties = #{record.viewProperties,jdbcType=VARCHAR},
+            </if>
+            <if test="record.goodCommentCount != null">
+                good_comment_count = #{record.goodCommentCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.commonCommentCount != null">
+                common_comment_count = #{record.commonCommentCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.badCommentCount != null">
+                bad_comment_count = #{record.badCommentCount,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_product
+        set id = #{record.id,jdbcType=BIGINT},
+        create_time = #{record.createTime,jdbcType=BIGINT},
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+        name = #{record.name,jdbcType=VARCHAR},
+        sub_name = #{record.subName,jdbcType=VARCHAR},
+        code = #{record.code,jdbcType=CHAR},
+        product_type = #{record.productType,jdbcType=BIGINT},
+        on_sale_time = #{record.onSaleTime,jdbcType=BIGINT},
+        off_sale_time = #{record.offSaleTime,jdbcType=BIGINT},
+        brand_id = #{record.brandId,jdbcType=BIGINT},
+        state = #{record.state,jdbcType=TINYINT},
+        max_price = #{record.maxPrice,jdbcType=INTEGER},
+        min_price = #{record.minPrice,jdbcType=INTEGER},
+        sale_count = #{record.saleCount,jdbcType=INTEGER},
+        view_count = #{record.viewCount,jdbcType=INTEGER},
+        comment_count = #{record.commentCount,jdbcType=INTEGER},
+        comment_score = #{record.commentScore,jdbcType=INTEGER},
+        view_properties = #{record.viewProperties,jdbcType=VARCHAR},
+        good_comment_count = #{record.goodCommentCount,jdbcType=INTEGER},
+        common_comment_count = #{record.commonCommentCount,jdbcType=INTEGER},
+        bad_comment_count = #{record.badCommentCount,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+
+    <!--批量更新上架或下架-->
+    <update id="updateStateByIds" parameterType="map">
+        update t_product set state = #{state}
+        <if test="onSale != null">
+            ,on_sale_time=#{onSale}
+        </if>
+        <if test="offSale != null">
+           , off_sale_time=#{offSale}
+        </if>
+        where id in(
+        <foreach collection="list" item="item" separator=",">
+            #{item}
+        </foreach>
+        )
+
+
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.yaorange.pojo.TProduct">
+        update t_product
+        <set>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="subName != null">
+                sub_name = #{subName,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=CHAR},
+            </if>
+            <if test="productType != null">
+                product_type = #{productType,jdbcType=BIGINT},
+            </if>
+            <if test="onSaleTime != null">
+                on_sale_time = #{onSaleTime,jdbcType=BIGINT},
+            </if>
+            <if test="offSaleTime != null">
+                off_sale_time = #{offSaleTime,jdbcType=BIGINT},
+            </if>
+            <if test="brandId != null">
+                brand_id = #{brandId,jdbcType=BIGINT},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=TINYINT},
+            </if>
+            <if test="maxPrice != null">
+                max_price = #{maxPrice,jdbcType=INTEGER},
+            </if>
+            <if test="minPrice != null">
+                min_price = #{minPrice,jdbcType=INTEGER},
+            </if>
+            <if test="saleCount != null">
+                sale_count = #{saleCount,jdbcType=INTEGER},
+            </if>
+            <if test="viewCount != null">
+                view_count = #{viewCount,jdbcType=INTEGER},
+            </if>
+            <if test="commentCount != null">
+                comment_count = #{commentCount,jdbcType=INTEGER},
+            </if>
+            <if test="commentScore != null">
+                comment_score = #{commentScore,jdbcType=INTEGER},
+            </if>
+            <if test="viewProperties != null">
+                view_properties = #{viewProperties,jdbcType=VARCHAR},
+            </if>
+            <if test="goodCommentCount != null">
+                good_comment_count = #{goodCommentCount,jdbcType=INTEGER},
+            </if>
+            <if test="commonCommentCount != null">
+                common_comment_count = #{commonCommentCount,jdbcType=INTEGER},
+            </if>
+            <if test="badCommentCount != null">
+                bad_comment_count = #{badCommentCount,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yaorange.pojo.TProduct">
+    update t_product
+    set create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      sub_name = #{subName,jdbcType=VARCHAR},
+      code = #{code,jdbcType=CHAR},
+      product_type = #{productType,jdbcType=BIGINT},
+      on_sale_time = #{onSaleTime,jdbcType=BIGINT},
+      off_sale_time = #{offSaleTime,jdbcType=BIGINT},
+      brand_id = #{brandId,jdbcType=BIGINT},
+      state = #{state,jdbcType=TINYINT},
+      max_price = #{maxPrice,jdbcType=INTEGER},
+      min_price = #{minPrice,jdbcType=INTEGER},
+      sale_count = #{saleCount,jdbcType=INTEGER},
+      view_count = #{viewCount,jdbcType=INTEGER},
+      comment_count = #{commentCount,jdbcType=INTEGER},
+      comment_score = #{commentScore,jdbcType=INTEGER},
+      view_properties = #{viewProperties,jdbcType=VARCHAR},
+      good_comment_count = #{goodCommentCount,jdbcType=INTEGER},
+      common_comment_count = #{commonCommentCount,jdbcType=INTEGER},
+      bad_comment_count = #{badCommentCount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="easybuy_manager_web:war">
+    <output-path>$PROJECT_DIR$/../easybuy_manager/easybuy_manager_web/target</output-path>
+    <root id="archive" name="easybuy_manager_web.war">
+      <element id="artifact" artifact-name="easybuy_manager_web:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,5 @@
+com\yaorange\service\impl\UserServiceImpl.class
+com\yaorange\service\UserService.class
+com\yaorange\controller\RegistController.class
+com\yaorange\controller\SsoServerController.class
+com\yaorange\controller\MainController.class

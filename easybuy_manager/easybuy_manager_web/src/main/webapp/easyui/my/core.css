@@ -1,0 +1,70 @@
+.easyui-textbox{width:70%;max-width:450px;}
+.easyui-combotree{width:70%;max-width:450px;}
+.input-div{
+	overflow:hidden;
+	margin-top:15px;
+}
+.input-div label{
+	display:inline-block;
+	width:20%;
+	max-width:100px;
+	line-height:30px;
+	font-size:12px;text-align:right;
+	padding:0 5px;
+}
+
+.searchForm{
+	border-top:solid 1px #eee;
+	margin:0 -10px;
+	margin-top:5px;
+	padding:10px;
+	padding-bottom:5px;
+}
+
+.tableGroup{
+	height:100%;
+}
+
+.globalPane{box-shadow:0 1px 2px rgba(90, 90, 90, 0.15);
+position:absolute;
+overflow:hidden;background:#fff;border-radius:2px;z-index:9999;
+left:50%;top:50%;font-size:12px;display:none;margin:0;padding:5px 5px;}
+.globalContent{padding:8px 15px;font-size:16px;}
+.globalButtons{text-align:center;padding:6px;padding-top:2px;}
+.globalButtons .btn{margin-left:5px;margin-right:5px;}
+#globalAjaxing{
+	background:#fff url(images/loading.gif) 6px center no-repeat;
+	padding-left:28px;border:solid 1px #b0b0b0;}
+.dialogModalWraper{
+	  filter:alpha(opacity=15);  
+      -moz-opacity:0.15;  
+      -khtml-opacity: 0.15;  
+      opacity: 0.15;
+      background:#000;
+      position:absolute;
+      width:100%;
+      left:0;
+      top:0;
+}
+
+.bg-gradient{
+border:solid 1px #ccc;
+background-image:-webkit-gradient(linear,left 0,left 100%,from(rgba(0,130,115,0.1)),to(rgba(0,130,115,0.02)));
+background-image:-webkit-linear-gradient(top,rgba(0,130,115,0.1),0,rgba(0,130,115,0.02),100%);
+background-image:-moz-linear-gradient(top,rgba(0,130,115,0.1) 0,rgba(0,130,115,0.02) 100%);
+background-image:linear-gradient(to bottom,rgba(0,130,115,0.1) 0,rgba(0,130,115,0.02) 100%);
+background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0028323c',endColorstr='#0c28323c',GradientType=0);
+filter:none;}
+.bg-primary{color:#fff;background-color:#047ee4;}
+.bg-danger{background-color:#e33244;color:#fce5e8;}
+
+red{color:#f00;}
+green{color : #0c0;}
+yellow{color:yellow;}
+blue{color:blue;}
+orange{color:orange;}
+.buttonSplit{display: inline-block; width: 1px;border-left: solid 1px #ccc;margin: 0 3px; height: 16px;margin-top: 5px;margin-bottom: -5px;}
+.iconfont{font-weight:bold;}
+.table input{
+	border:solid 1px #ddd;padding:0 5px; line-height:30px;height:30px;border-radius:2px;
+}

@@ -1,0 +1,22 @@
+package com.yaorange.util;
+
+import java.util.Properties;
+
+import com.yaorange.util.PropertiesHelper;
+/**
+ * web层全局常量配置帮助类
+ * @author nixianhua
+ *
+ */
+public class GlobalSetting {
+	private static final String FILE_NAME = "/resource/global.properties";
+	private GlobalSetting(){}
+	private static Properties p;
+	static{
+		p = PropertiesHelper.load(FILE_NAME);
+	}
+	public static String get(String key){
+		return null==p?"":p.getProperty(key);
+	}
+	
+}

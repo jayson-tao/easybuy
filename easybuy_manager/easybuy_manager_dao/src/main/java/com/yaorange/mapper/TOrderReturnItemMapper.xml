@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaorange.mapper.TOrderReturnItemMapper" >
+  <resultMap id="BaseResultMap" type="com.yaorange.pojo.TOrderReturnItem" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="return_id" property="returnId" jdbcType="BIGINT" />
+    <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sku_id" property="skuId" jdbcType="BIGINT" />
+    <result column="sku_main_pic" property="skuMainPic" jdbcType="VARCHAR" />
+    <result column="sku_properties" property="skuProperties" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="total_money" property="totalMoney" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, create_time, update_time, order_id, return_id, product_id, name, sku_id, sku_main_pic, 
+    sku_properties, price, amount, total_money
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yaorange.pojo.TOrderReturnItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_order_return_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_return_item
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_order_return_item
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yaorange.pojo.TOrderReturnItemExample" >
+    delete from t_order_return_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yaorange.pojo.TOrderReturnItem" >
+    insert into t_order_return_item (id, create_time, update_time, 
+      order_id, return_id, product_id, 
+      name, sku_id, sku_main_pic, 
+      sku_properties, price, amount, 
+      total_money)
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{orderId,jdbcType=BIGINT}, #{returnId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{skuId,jdbcType=BIGINT}, #{skuMainPic,jdbcType=VARCHAR}, 
+      #{skuProperties,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER}, 
+      #{totalMoney,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yaorange.pojo.TOrderReturnItem" >
+    insert into t_order_return_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="returnId != null" >
+        return_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="skuId != null" >
+        sku_id,
+      </if>
+      <if test="skuMainPic != null" >
+        sku_main_pic,
+      </if>
+      <if test="skuProperties != null" >
+        sku_properties,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="totalMoney != null" >
+        total_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="returnId != null" >
+        #{returnId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null" >
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="skuMainPic != null" >
+        #{skuMainPic,jdbcType=VARCHAR},
+      </if>
+      <if test="skuProperties != null" >
+        #{skuProperties,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null" >
+        #{totalMoney,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yaorange.pojo.TOrderReturnItemExample" resultType="java.lang.Integer" >
+    select count(*) from t_order_return_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_order_return_item
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.returnId != null" >
+        return_id = #{record.returnId,jdbcType=BIGINT},
+      </if>
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuId != null" >
+        sku_id = #{record.skuId,jdbcType=BIGINT},
+      </if>
+      <if test="record.skuMainPic != null" >
+        sku_main_pic = #{record.skuMainPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuProperties != null" >
+        sku_properties = #{record.skuProperties,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalMoney != null" >
+        total_money = #{record.totalMoney,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_order_return_item
+    set id = #{record.id,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT},
+      order_id = #{record.orderId,jdbcType=BIGINT},
+      return_id = #{record.returnId,jdbcType=BIGINT},
+      product_id = #{record.productId,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      sku_id = #{record.skuId,jdbcType=BIGINT},
+      sku_main_pic = #{record.skuMainPic,jdbcType=VARCHAR},
+      sku_properties = #{record.skuProperties,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=INTEGER},
+      amount = #{record.amount,jdbcType=INTEGER},
+      total_money = #{record.totalMoney,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yaorange.pojo.TOrderReturnItem" >
+    update t_order_return_item
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="returnId != null" >
+        return_id = #{returnId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null" >
+        sku_id = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="skuMainPic != null" >
+        sku_main_pic = #{skuMainPic,jdbcType=VARCHAR},
+      </if>
+      <if test="skuProperties != null" >
+        sku_properties = #{skuProperties,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null" >
+        total_money = #{totalMoney,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yaorange.pojo.TOrderReturnItem" >
+    update t_order_return_item
+    set create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      order_id = #{orderId,jdbcType=BIGINT},
+      return_id = #{returnId,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      sku_id = #{skuId,jdbcType=BIGINT},
+      sku_main_pic = #{skuMainPic,jdbcType=VARCHAR},
+      sku_properties = #{skuProperties,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=INTEGER},
+      total_money = #{totalMoney,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

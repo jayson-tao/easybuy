@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaorange.mapper.TPayInteractionMapper" >
+  <resultMap id="BaseResultMap" type="com.yaorange.pojo.TPayInteraction" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="union_pay_sn" property="unionPaySn" jdbcType="CHAR" />
+    <result column="pay_bill_id" property="payBillId" jdbcType="BIGINT" />
+    <result column="pay_channel" property="payChannel" jdbcType="TINYINT" />
+    <result column="money" property="money" jdbcType="INTEGER" />
+    <result column="return_seq" property="returnSeq" jdbcType="VARCHAR" />
+    <result column="return_money" property="returnMoney" jdbcType="INTEGER" />
+    <result column="notify_time" property="notifyTime" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="reaction_data" property="reactionData" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, update_time, create_time, union_pay_sn, pay_bill_id, pay_channel, money, return_seq, 
+    return_money, notify_time, state, reaction_data
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yaorange.pojo.TPayInteractionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_pay_interaction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_pay_interaction
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_pay_interaction
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yaorange.pojo.TPayInteractionExample" >
+    delete from t_pay_interaction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yaorange.pojo.TPayInteraction" >
+    insert into t_pay_interaction (id, update_time, create_time, 
+      union_pay_sn, pay_bill_id, pay_channel, 
+      money, return_seq, return_money, 
+      notify_time, state, reaction_data
+      )
+    values (#{id,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, 
+      #{unionPaySn,jdbcType=CHAR}, #{payBillId,jdbcType=BIGINT}, #{payChannel,jdbcType=TINYINT}, 
+      #{money,jdbcType=INTEGER}, #{returnSeq,jdbcType=VARCHAR}, #{returnMoney,jdbcType=INTEGER}, 
+      #{notifyTime,jdbcType=BIGINT}, #{state,jdbcType=TINYINT}, #{reactionData,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yaorange.pojo.TPayInteraction" >
+    insert into t_pay_interaction
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="unionPaySn != null" >
+        union_pay_sn,
+      </if>
+      <if test="payBillId != null" >
+        pay_bill_id,
+      </if>
+      <if test="payChannel != null" >
+        pay_channel,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="returnSeq != null" >
+        return_seq,
+      </if>
+      <if test="returnMoney != null" >
+        return_money,
+      </if>
+      <if test="notifyTime != null" >
+        notify_time,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="reactionData != null" >
+        reaction_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="unionPaySn != null" >
+        #{unionPaySn,jdbcType=CHAR},
+      </if>
+      <if test="payBillId != null" >
+        #{payBillId,jdbcType=BIGINT},
+      </if>
+      <if test="payChannel != null" >
+        #{payChannel,jdbcType=TINYINT},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=INTEGER},
+      </if>
+      <if test="returnSeq != null" >
+        #{returnSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="returnMoney != null" >
+        #{returnMoney,jdbcType=INTEGER},
+      </if>
+      <if test="notifyTime != null" >
+        #{notifyTime,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="reactionData != null" >
+        #{reactionData,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yaorange.pojo.TPayInteractionExample" resultType="java.lang.Integer" >
+    select count(*) from t_pay_interaction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_pay_interaction
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.unionPaySn != null" >
+        union_pay_sn = #{record.unionPaySn,jdbcType=CHAR},
+      </if>
+      <if test="record.payBillId != null" >
+        pay_bill_id = #{record.payBillId,jdbcType=BIGINT},
+      </if>
+      <if test="record.payChannel != null" >
+        pay_channel = #{record.payChannel,jdbcType=TINYINT},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=INTEGER},
+      </if>
+      <if test="record.returnSeq != null" >
+        return_seq = #{record.returnSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnMoney != null" >
+        return_money = #{record.returnMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.notifyTime != null" >
+        notify_time = #{record.notifyTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=TINYINT},
+      </if>
+      <if test="record.reactionData != null" >
+        reaction_data = #{record.reactionData,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_pay_interaction
+    set id = #{record.id,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      union_pay_sn = #{record.unionPaySn,jdbcType=CHAR},
+      pay_bill_id = #{record.payBillId,jdbcType=BIGINT},
+      pay_channel = #{record.payChannel,jdbcType=TINYINT},
+      money = #{record.money,jdbcType=INTEGER},
+      return_seq = #{record.returnSeq,jdbcType=VARCHAR},
+      return_money = #{record.returnMoney,jdbcType=INTEGER},
+      notify_time = #{record.notifyTime,jdbcType=BIGINT},
+      state = #{record.state,jdbcType=TINYINT},
+      reaction_data = #{record.reactionData,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yaorange.pojo.TPayInteraction" >
+    update t_pay_interaction
+    <set >
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="unionPaySn != null" >
+        union_pay_sn = #{unionPaySn,jdbcType=CHAR},
+      </if>
+      <if test="payBillId != null" >
+        pay_bill_id = #{payBillId,jdbcType=BIGINT},
+      </if>
+      <if test="payChannel != null" >
+        pay_channel = #{payChannel,jdbcType=TINYINT},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=INTEGER},
+      </if>
+      <if test="returnSeq != null" >
+        return_seq = #{returnSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="returnMoney != null" >
+        return_money = #{returnMoney,jdbcType=INTEGER},
+      </if>
+      <if test="notifyTime != null" >
+        notify_time = #{notifyTime,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="reactionData != null" >
+        reaction_data = #{reactionData,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yaorange.pojo.TPayInteraction" >
+    update t_pay_interaction
+    set update_time = #{updateTime,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      union_pay_sn = #{unionPaySn,jdbcType=CHAR},
+      pay_bill_id = #{payBillId,jdbcType=BIGINT},
+      pay_channel = #{payChannel,jdbcType=TINYINT},
+      money = #{money,jdbcType=INTEGER},
+      return_seq = #{returnSeq,jdbcType=VARCHAR},
+      return_money = #{returnMoney,jdbcType=INTEGER},
+      notify_time = #{notifyTime,jdbcType=BIGINT},
+      state = #{state,jdbcType=TINYINT},
+      reaction_data = #{reactionData,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

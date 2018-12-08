@@ -1,0 +1,41 @@
+<svg width='136px' height='136px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-balls"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><g transform="rotate(0 50 50)">
+  <circle r="4" cx="5" cy="50">
+    <animateTransform attributeName="transform" type="translate" begin="0s" repeatCount="indefinite" dur="0.5s" values="0 0;13.180194846605358 -31.819805153394636" keyTimes="0;1"/>
+    <animate attributeName="fill" dur="0.5s" begin="0s" repeatCount="indefinite"  keyTimes="0;1" values="#fefefe;#cec9c9"/>
+  </circle>
+</g><g transform="rotate(45 50 50)">
+  <circle r="4" cx="5" cy="50">
+    <animateTransform attributeName="transform" type="translate" begin="0s" repeatCount="indefinite" dur="0.5s" values="0 0;13.180194846605358 -31.819805153394636" keyTimes="0;1"/>
+    <animate attributeName="fill" dur="0.5s" begin="0s" repeatCount="indefinite"  keyTimes="0;1" values="#cec9c9;#3c302e"/>
+  </circle>
+</g><g transform="rotate(90 50 50)">
+  <circle r="4" cx="5" cy="50">
+    <animateTransform attributeName="transform" type="translate" begin="0s" repeatCount="indefinite" dur="0.5s" values="0 0;13.180194846605358 -31.819805153394636" keyTimes="0;1"/>
+    <animate attributeName="fill" dur="0.5s" begin="0s" repeatCount="indefinite"  keyTimes="0;1" values="#3c302e;#bb171a"/>
+  </circle>
+</g><g transform="rotate(135 50 50)">
+  <circle r="4" cx="5" cy="50">
+    <animateTransform attributeName="transform" type="translate" begin="0s" repeatCount="indefinite" dur="0.5s" values="0 0;13.180194846605358 -31.819805153394636" keyTimes="0;1"/>
+    <animate attributeName="fill" dur="0.5s" begin="0s" repeatCount="indefinite"  keyTimes="0;1" values="#bb171a;#fefefe"/>
+  </circle>
+</g><g transform="rotate(180 50 50)">
+  <circle r="4" cx="5" cy="50">
+    <animateTransform attributeName="transform" type="translate" begin="0s" repeatCount="indefinite" dur="0.5s" values="0 0;13.180194846605358 -31.819805153394636" keyTimes="0;1"/>
+    <animate attributeName="fill" dur="0.5s" begin="0s" repeatCount="indefinite"  keyTimes="0;1" values="#fefefe;#cec9c9"/>
+  </circle>
+</g><g transform="rotate(225 50 50)">
+  <circle r="4" cx="5" cy="50">
+    <animateTransform attributeName="transform" type="translate" begin="0s" repeatCount="indefinite" dur="0.5s" values="0 0;13.180194846605358 -31.819805153394636" keyTimes="0;1"/>
+    <animate attributeName="fill" dur="0.5s" begin="0s" repeatCount="indefinite"  keyTimes="0;1" values="#cec9c9;#3c302e"/>
+  </circle>
+</g><g transform="rotate(270 50 50)">
+  <circle r="4" cx="5" cy="50">
+    <animateTransform attributeName="transform" type="translate" begin="0s" repeatCount="indefinite" dur="0.5s" values="0 0;13.180194846605358 -31.819805153394636" keyTimes="0;1"/>
+    <animate attributeName="fill" dur="0.5s" begin="0s" repeatCount="indefinite"  keyTimes="0;1" values="#3c302e;#bb171a"/>
+  </circle>
+</g><g transform="rotate(315 50 50)">
+  <circle r="4" cx="5" cy="50">
+    <animateTransform attributeName="transform" type="translate" begin="0s" repeatCount="indefinite" dur="0.5s" values="0 0;13.180194846605358 -31.819805153394636" keyTimes="0;1"/>
+    <animate attributeName="fill" dur="0.5s" begin="0s" repeatCount="indefinite"  keyTimes="0;1" values="#bb171a;#fefefe"/>
+  </circle>
+</g></svg>

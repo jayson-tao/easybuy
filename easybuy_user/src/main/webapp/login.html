@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-CN" class="ie8"> <![endif]-->
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+		<title>登录 - 易购物-网购首选</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link type="text/css" rel="stylesheet" href="/static/css/common.css">
+		<script type="text/javascript" src="/static/js/jquery.js"></script>
+		<script type="text/javascript" src="/static/js/common.js"></script>
+		<script type="text/javascript" src="/static/js/login.js"></script>
+		<link type="text/css" rel="stylesheet" href="/static/css/login.css">
+		<link type="text/css" rel="stylesheet" href="/static/css/color-style.css" />
+		<script type="text/javascript" src="/static/js/layer.js"></script>
+		<script type="text/javascript" src="/static/js/jquery.method.js"></script>
+		<script type="text/javascript" src="/static/js/placeholder.js"></script>
+		<script type="text/javascript" src="/static/js/jquery.supersized.min.js"></script>
+		<!-- 表单验证 -->
+		<script type="text/javascript" src="/static/js/jquery.validate.js"></script>
+		<script type="text/javascript" src="/static/js/jquery.validate.custom.js"></script>
+		<script type="text/javascript" src="/static/js/messages_zh.js"></script>
+		<script type="text/javascript" src="/static/js/jquery.form.js"></script>
+	</head>
+
+	<body>
+		<div class="header login-header w990">
+			<div class="logo-info">
+				<a href="javascript:;" onclick="goHome()" class="logo">
+					<img src="/static/css/mall_logo_0.png" />
+				</a>
+				<span class="findpw">欢迎登录</span>
+			</div>
+		</div>
+		<div class="login-content">
+			<div class="login-banner" style="background: url('/static/css/login-banner.jpg') center;">
+				<div class="w990 pos-r">
+					<div id="14849678895bBEJL" class="login-form">
+						<div class="login-con pos-r">
+
+							<div class="login-wrap">
+
+								<div class="login-tit">
+									还没有账号？
+									<a href="reg.phone.html" class="regist-link color" id="ssoRegLink">
+										立即注册
+										<i>&gt;</i>
+									</a>
+								</div>
+
+								<div class="login-radio">
+									<ul>
+										<li class="active" id="login2" onclick="setTab('login',2,2)">普通登录</li>
+										<li class="" id="login1" onclick="setTab('login',1,2)">动态密码登录</li>
+									</ul>
+								</div>
+								<!-- 普通登录 start -->
+								<div id="con_login_2" class="form">
+									<form id="passprotForm" action="/login/passport/in" method="POST">
+										<div class="form-group item-name" id="usernameGroup">
+											<!-- 错误项标注 给div另添加一个class值'error' star -->
+											<div class="form-control-box">
+												<i class="icon"></i>
+												<input type="text" id="username" name="username" class="text" tabindex="1" placeholder="已验证手机/邮箱/用户名" autocomplete="off" value="18483693536" />
+											</div>
+
+											<!-- 错误项标注 给div另添加一个class值'error' end -->
+										</div>
+										<div class="form-group item-password">
+											<div class="form-control-box">
+												<i class="icon"></i>
+												<input type="password" id="password" name="password" value="123456" class="text" tabindex="2" placeholder="密码" autocomplete="off" />
+											</div>
+
+										</div>
+
+										<div class="safety">
+											<label for="remember">
+												<input type="checkbox" value="1" id="remember" class="checkbox" />
+												<span>自动登录</span>
+											</label>
+
+											<a class="forget-password fr" href="forget.html">忘记密码？</a>
+										</div>
+										<div class="login-btn">
+											<input type="submit" class="btn-img btn-entry bg-color" id="loginsubmit" value="立即登录" />
+										</div>
+										<div class="item-coagent">
+											<a href="javascript:void(0);" data-id="pc_weixin" class="website-login">
+												<i class="weixin"></i>
+											</a>
+											<a href="javascript:void(0);" data-id="qq" class="website-login">
+												<i class="qq"></i>
+											</a>
+											<a href="javascript:void(0);" data-id="weibo" class="last website-login">
+												<i class="sina"></i>
+											</a>
+										</div>
+									</form>
+								</div>
+								<!-- 普通登录 end -->
+								<!-- 动态登录 star -->
+								<div id="con_login_1" class="form" style="display: none;">
+									<form id="smsForm" action="/login/sms/in" method="POST">
+										<div class="form-group item-name">
+											<!-- 错误项标注 给div另添加一个class值'error' star -->
+											<div class="form-control-box error">
+												<i class="icon"></i>
+												<input type="text" id="mobile" name="mobile" class="text" value="" tabindex="1" placeholder="已注册的手机号码" autocomplete="off" />
+											</div>
+											<!-- 错误项标注 给div另添加一个class值'error' end -->
+										</div>
+
+										<div class="form-group form-group-spe captcha" id="o-authcode">
+											<div class="form-control-box">
+												<i class="icon"></i>
+												<input type="text" id="captcha_sms" name="captcha" class="text" tabindex="2" placeholder="验证码" />
+												<label class="captcha"> <img id="captcha_sms-image" class="captcha-image" src="/regist/captcha" onclick="changeCaptcha(this)" alt="点击换图" title="点击换图" style="vertical-align: middle; cursor: pointer;"></label>
+											</div>
+
+										</div>
+
+										<div class="form-group form-group-spe form-group-phonecode">
+											<div class="form-control-box fl">
+												<i class="icon"></i>
+												<input type="text" id="smsCaptcha" name="smsCaptcha" class="text" tabindex="3" placeholder="动态密码" />
+												<a id="btn_send_sms_code" href="javascript:void(0);" class="phonecode">获取手机动态验证码</a>
+											</div>
+
+										</div>
+
+										<div class="safety">
+											<label for="remember">
+											<input type="checkbox" id="remember" name="remember" class="checkbox" value="0" />
+											<span>自动登录。</span>
+										</label>
+										</div>
+
+										<div class="login-btn">
+											<input type="submit" class="btn-img btn-entry bg-color" id="loginsubmit" value="立即登录" />
+										</div>
+										<div class="item-coagent">
+											<a href="javascript:void(0);" data-id="qq" class="website-login">
+												<i class="qq"></i>
+											</a>
+											<a href="javascript:void(0);" data-id="pc_weixin" class="website-login">
+												<i class="weixin"></i>
+											</a>
+											<a href="javascript:void(0);" data-id="weibo" class="last website-login">
+												<i class="sina"></i>
+											</a>
+										</div>
+									</form>
+								</div>
+								<!-- 动态登录 end -->
+							</div>
+
+						</div>
+					</div>
+
+					<script id="client_rules" type="text/javascript">
+						[{
+							"id": "loginmodel-username",
+							"name": "username",
+							"attribute": "username",
+							"rules": {
+								"required": true,
+								"messages": {
+									"required": "请输入用户名"
+								}
+							}
+						}, {
+							"id": "loginmodel-password",
+							"name": "password",
+							"attribute": "password",
+							"rules": {
+								"required": true,
+								"messages": {
+									"required": "请输入密码"
+								}
+							}
+						}, {
+							"id": "loginmodel-username",
+							"name": "username",
+							"attribute": "username",
+							"rules": {
+								"string": true,
+								"messages": {
+									"string": "用户名必须是一条字符串。",
+									"maxlength": "用户名长度必需在50以内"
+								},
+								"maxlength": 50
+							}
+						}, {
+							"id": "loginmodel-password",
+							"name": "password",
+							"attribute": "password",
+							"rules": {
+								"string": true,
+								"messages": {
+									"string": "密码必须是一条字符串。",
+									"maxlength": "密码长度必需在32以内"
+								},
+								"maxlength": 32
+							}
+						}, {
+							"id": "loginmodel-rememberme",
+							"name": "rememberMe",
+							"attribute": "rememberMe",
+							"rules": {
+								"boolean": {
+									"trueValue": "1",
+									"falseValue": "0"
+								},
+								"message": {
+									"boolean": "记住用户名密码的值必须要么为\"1\"，要么为\"0\"。"
+								}
+							}
+						}, ]
+					</script>
+					<script id="sms_client_rules" type="text/javascript">
+						[{
+							"id": "smsloginmodel-mobile",
+							"name": "mobile",
+							"attribute": "mobile",
+							"rules": {
+								"required": true,
+								"messages": {
+									"required": "请输入手机号码"
+								}
+							}
+						}, {
+							"id": "smsloginmodel-smscaptcha",
+							"name": "smsCaptcha",
+							"attribute": "smsCaptcha",
+							"rules": {
+								"required": true,
+								"messages": {
+									"required": "请输入动态密码"
+								}
+							}
+						}, {
+							"id": "smsloginmodel-mobile",
+							"name": "mobile",
+							"attribute": "mobile",
+							"rules": {
+								"match": {
+									"pattern": /^13[0-9]{1}[0-9]{8}$|15[0-9]{1}[0-9]{8}$|18[0-9]{1}[0-9]{8}$|17[0-9]{1}[0-9]{8}$|14[0-9]{1}[0-9]{8}$/,
+									"not": false,
+									"skipOnEmpty": 1
+								},
+								"messages": {
+									"match": "请输入一个有效的手机号码"
+								}
+							}
+						}, {
+							"id": "smsloginmodel-rememberme",
+							"name": "rememberMe",
+							"attribute": "rememberMe",
+							"rules": {
+								"boolean": {
+									"trueValue": "1",
+									"falseValue": "0"
+								},
+								"message": {
+									"boolean": "记住用户名密码的值必须要么为\"1\"，要么为\"0\"。"
+								}
+							}
+						}, {
+							"id": "smsloginmodel-captcha",
+							"name": "captcha",
+							"attribute": "captcha",
+							"rules": {
+								"required": true,
+								"messages": {
+									"required": "请输入图片验证码"
+								}
+							}
+						}]
+					</script>
+					<script type="text/javascript">
+						$().ready(function() {
+							var href = $('#ssoRegLink').attr("href");
+							var params = getHtmlParmas();
+							var fr = params['from'] || '/ssoLogin';
+							var to = params['to'] || '';
+							href+='?from='+fr+'&to='+to;
+							$('#ssoRegLink').attr('href',href);
+
+							//二维码、PC登录切换
+							$('.qrcode-target').click(function() {
+								if($(this).hasClass('btn-qrcode')) {
+									$(this).removeClass('btn-qrcode').addClass('btn-login').attr('title', '去电脑登录');
+									$('.login-wrap').hide();
+									$('.login-mobile').show();
+									return;
+								}
+								if($(this).hasClass('btn-login')) {
+									$(this).removeClass('btn-login').addClass('btn-qrcode').attr('title', '去手机扫码登录');
+									$('.login-wrap').show();
+									$('.login-mobile').hide();
+								}
+							});
+
+							var container = $("#14849678895bBEJL");
+
+							/**
+							 * 初始化validator默认值
+							 */
+							//先获取到默认函数，不能直接覆盖掉
+							var errorPlacement = $.validator.defaults.errorPlacement;
+							$.validator.setDefaults({
+								errorPlacement: function(error, element) {
+									$(element).parent(".form-control-box").addClass("error");
+									errorPlacement.call(this, error, element);
+								},
+								// 失去焦点验证
+								onfocusout: function(element) {
+									$(element).valid();
+								},
+								// 成功后移除错误提示
+								success: function(error) {
+									var error_id = $(error).attr("id");
+									var element_id = $(error).attr("for");
+									// 移除错误样式
+									$("[id='" + error_id + "']").remove();
+									$(":input[id='" + element_id + "']").parent(".form-control-box").removeClass("error");
+								}
+							});
+
+							var validator = $(container).find("#passprotForm").validate();
+							// 验证规则，此验证规则会影响编辑器中JavaScript的的格式化操作
+							$.validator.addRules($("#client_rules").html());
+							$(container).find("#passprotForm").submit(function() {
+								$('#passprotForm').find('.form-control-box').removeClass('error');
+								$('#usernameGroup').find('.form-control-error').remove();
+								if(!validator.form()) {
+									return false;
+								}
+								return true;
+							});
+							//提交登录信息--登录成功链接到sso登录客户端去
+							$(container).find("#passprotForm").ajaxForm(function(data){
+								var url = location.href;
+								if(data.success){
+									var params = getHtmlParmas();
+									var fr = params['from'];
+									var to = params['to'] || '';
+
+									var wwwurl = params['wwwurl'] || '/';
+									if((typeof fr)=="undefined" || ''==fr || null==fr){
+										location.href = wwwurl;
+									}else{
+										location.href = fr+'?st='+data.data+'&to='+to;
+									}
+								}else{
+									$('#passprotForm').find('.form-control-box').addClass('error');
+									$('#usernameGroup').append('<span id="username-error" data-error-id="username" class="form-control-error"><i class="fa fa-warning"></i>'+data.message+' '+data.info+'</span>');
+									$.msg(data.message+" "+data.info, {time: 5000});
+								}
+							});
+
+							var validator1 = $(container).find("#smsForm").validate();
+							// 验证规则，此验证规则会影响编辑器中JavaScript的的格式化操作
+							$.validator.addRules($("#sms_client_rules").html());
+							$(container).find("#smsForm").submit(function() {
+								if(!validator1.form()) {
+									return false;
+								}
+								return true;
+							});
+							$(container).find("#smsForm").ajaxForm(function(data){
+								if(data.success){
+									location.href = "/";
+								}else{
+									$.msg(data.message+" "+data.info, {time: 5000});
+								}
+							});
+
+							$(container).find("#btn_send_sms_code").click(function() {
+								if($(this).prop("disabled") == true || $(this).data("doing") == true) {
+									return;
+								}
+
+								var mobile_valid = $("#mobile").valid();
+								var captcha_valid = true;
+								if($("#captcha_sms").size() > 0) {
+									captcha_valid = $("#captcha_sms").valid();
+								}
+
+								if(mobile_valid && captcha_valid) {
+									var target = this;
+									$(this).data("doing", true);
+									var mobile = $("#mobile").val();
+									$.post('/regist/sendSmsCode', {
+										mobile: mobile,
+										captcha: $("#captcha_sms").val()
+									}, function(result) {
+										if(result.code == 0) {
+											// 开始倒计时
+											countdown(target, "获取手机动态验证码");
+										} else {
+											// 失败后点击验证码
+											if($("#captcha_sms-image").size() > 0) {
+												$("#captcha_sms").val("");
+												$("#captcha_sms-image").click();
+											}
+											$.msg(result.message, {time: 5000});
+										}
+										$(target).data("doing", false);
+									}, "json");
+								}
+
+							});
+
+							var wait = 60;
+							function countdown(obj, msg) {
+								obj = $(obj);
+								if(wait <= 0) {
+									obj.prop("disabled", false);
+									obj.html(msg);
+									wait = 60;
+								} else {
+									if(msg == undefined || msg == null) {
+										msg = obj.html();
+									}
+									obj.prop("disabled", true);
+									obj.html(wait + "秒后重新获取");
+									wait--;
+									setTimeout(function() {
+										countdown(obj, msg)
+									}, 1000)
+								}
+							}
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+
+		<!-- 底部 -->
+		<div class="site-footer">
+
+			<div class="footer-desc-copyright">
+
+				<p class="footer-ecscinfo">
+					<a href="#">首页</a>
+					|
+
+					<a href="#">隐私保护</a>
+					|
+
+					<a href="#">联系我们</a>
+					|
+
+					<a href="#">免责条款</a>
+					|
+
+					<a href="#">公司简介</a>
+					|
+
+					<a href="#">意见反馈</a>
+
+					|
+					<a rel="nofollow" target="_blank" href="#">会员登录</a>
+					|
+					<a rel="nofollow" target="_blank" href="http://bbs.yaorange.cn/">会员论坛</a>
+					|
+					<a href="javascript:;" rel="nofollow">客服热线028-86261949</a>
+				</p>
+				<p class="footer-otherlink">
+					<a title="易购商城" target="_blank" href="http://yaorange.cn">易购商城</a>
+
+					|
+
+					<a title="菁鱼课堂" target="_blank" href="http://www.yaorange.cn">菁鱼课堂</a>
+
+					|
+
+					<a title="资讯速递" target="_blank" href="http://www.yaorange.cn">资讯速递</a>
+
+					|
+
+					<a title="快递查询" target="_blank" href="http://m.kuaidi100.com">快递查询</a>
+
+					|
+
+					<a title="论坛" target="_blank" href="http://bbs.yaorange.com/forum.php">会员论坛</a>
+
+					|
+
+					<a title="跟着强哥学JAVA有限公司" target="_blank" href="http://www.yaorange.cn">跟着强哥学JAVA有限公司</a>
+
+				</p>
+
+				<p class="footer-beian"> ICP备案证书号:
+					<a rel="nofollow" target="_blank" href="#">蜀ICP备88888888号-1</a>
+					<a rel="nofollow" target="_blank" href="#"><i></i>蜀公网安备 45323525326664号</a>
+				</p>
+				<p class="footer-Copyright">Copyright &copy; 2017
+					<a target="_blank" style="margin:0;padding:0;" href="http://www.yaorange.com/">yaorange.cn</a> All Rights Reserved. </p>
+				<p>&nbsp;</p>
+
+				<p class="footer-fp-img">
+					<a target="_blank" href="#"><img src="/static/img/test/kxwz.png"></a>
+					<a target="_blank" href="#"><img src="/static/img/test/smyz.png"></a>
+					<a target="_blank" href="#"><img src="/static/img/test/cxyz.jpg"></a>
+					<a target="_blank" href="#"><img src="/static/img/test/hyyz.png"></a>
+					<a target="_blank" href="#"><img src="/static/img/test/jpfw.png"></a>
+				</p>
+			</div>
+
+		</div>
+		<!-- 底部 _end-->
+
+	</body>
+
+</html>

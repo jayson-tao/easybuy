@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaorange.mapper.TVipBaseMapper" >
+  <resultMap id="BaseResultMap" type="com.yaorange.pojo.TVipBase" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="sso_id" property="ssoId" jdbcType="BIGINT" />
+    <result column="reg_channel" property="regChannel" jdbcType="TINYINT" />
+    <result column="reg_time" property="regTime" jdbcType="BIGINT" />
+    <result column="active_time" property="activeTime" jdbcType="BIGINT" />
+    <result column="active_type" property="activeType" jdbcType="TINYINT" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="TINYINT" />
+    <result column="grow_score" property="growScore" jdbcType="INTEGER" />
+    <result column="refer_id" property="referId" jdbcType="BIGINT" />
+    <result column="sex" property="sex" jdbcType="TINYINT" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="area_code" property="areaCode" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, create_time, update_time, sso_id, reg_channel, reg_time, active_time, active_type, 
+    qq, level, grow_score, refer_id, sex, birthday, area_code, address
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yaorange.pojo.TVipBaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_vip_base
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_vip_base
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_vip_base
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yaorange.pojo.TVipBaseExample" >
+    delete from t_vip_base
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yaorange.pojo.TVipBase" >
+    insert into t_vip_base (id, create_time, update_time, 
+      sso_id, reg_channel, reg_time, 
+      active_time, active_type, qq, 
+      level, grow_score, refer_id, 
+      sex, birthday, area_code, 
+      address)
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{ssoId,jdbcType=BIGINT}, #{regChannel,jdbcType=TINYINT}, #{regTime,jdbcType=BIGINT}, 
+      #{activeTime,jdbcType=BIGINT}, #{activeType,jdbcType=TINYINT}, #{qq,jdbcType=VARCHAR}, 
+      #{level,jdbcType=TINYINT}, #{growScore,jdbcType=INTEGER}, #{referId,jdbcType=BIGINT}, 
+      #{sex,jdbcType=TINYINT}, #{birthday,jdbcType=DATE}, #{areaCode,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yaorange.pojo.TVipBase" >
+    insert into t_vip_base
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="ssoId != null" >
+        sso_id,
+      </if>
+      <if test="regChannel != null" >
+        reg_channel,
+      </if>
+      <if test="regTime != null" >
+        reg_time,
+      </if>
+      <if test="activeTime != null" >
+        active_time,
+      </if>
+      <if test="activeType != null" >
+        active_type,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="growScore != null" >
+        grow_score,
+      </if>
+      <if test="referId != null" >
+        refer_id,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="areaCode != null" >
+        area_code,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="ssoId != null" >
+        #{ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="regChannel != null" >
+        #{regChannel,jdbcType=TINYINT},
+      </if>
+      <if test="regTime != null" >
+        #{regTime,jdbcType=BIGINT},
+      </if>
+      <if test="activeTime != null" >
+        #{activeTime,jdbcType=BIGINT},
+      </if>
+      <if test="activeType != null" >
+        #{activeType,jdbcType=TINYINT},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="growScore != null" >
+        #{growScore,jdbcType=INTEGER},
+      </if>
+      <if test="referId != null" >
+        #{referId,jdbcType=BIGINT},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yaorange.pojo.TVipBaseExample" resultType="java.lang.Integer" >
+    select count(*) from t_vip_base
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_vip_base
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.ssoId != null" >
+        sso_id = #{record.ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="record.regChannel != null" >
+        reg_channel = #{record.regChannel,jdbcType=TINYINT},
+      </if>
+      <if test="record.regTime != null" >
+        reg_time = #{record.regTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.activeTime != null" >
+        active_time = #{record.activeTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.activeType != null" >
+        active_type = #{record.activeType,jdbcType=TINYINT},
+      </if>
+      <if test="record.qq != null" >
+        qq = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=TINYINT},
+      </if>
+      <if test="record.growScore != null" >
+        grow_score = #{record.growScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.referId != null" >
+        refer_id = #{record.referId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=TINYINT},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.areaCode != null" >
+        area_code = #{record.areaCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_vip_base
+    set id = #{record.id,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT},
+      sso_id = #{record.ssoId,jdbcType=BIGINT},
+      reg_channel = #{record.regChannel,jdbcType=TINYINT},
+      reg_time = #{record.regTime,jdbcType=BIGINT},
+      active_time = #{record.activeTime,jdbcType=BIGINT},
+      active_type = #{record.activeType,jdbcType=TINYINT},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=TINYINT},
+      grow_score = #{record.growScore,jdbcType=INTEGER},
+      refer_id = #{record.referId,jdbcType=BIGINT},
+      sex = #{record.sex,jdbcType=TINYINT},
+      birthday = #{record.birthday,jdbcType=DATE},
+      area_code = #{record.areaCode,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yaorange.pojo.TVipBase" >
+    update t_vip_base
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="ssoId != null" >
+        sso_id = #{ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="regChannel != null" >
+        reg_channel = #{regChannel,jdbcType=TINYINT},
+      </if>
+      <if test="regTime != null" >
+        reg_time = #{regTime,jdbcType=BIGINT},
+      </if>
+      <if test="activeTime != null" >
+        active_time = #{activeTime,jdbcType=BIGINT},
+      </if>
+      <if test="activeType != null" >
+        active_type = #{activeType,jdbcType=TINYINT},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=TINYINT},
+      </if>
+      <if test="growScore != null" >
+        grow_score = #{growScore,jdbcType=INTEGER},
+      </if>
+      <if test="referId != null" >
+        refer_id = #{referId,jdbcType=BIGINT},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="areaCode != null" >
+        area_code = #{areaCode,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yaorange.pojo.TVipBase" >
+    update t_vip_base
+    set create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      sso_id = #{ssoId,jdbcType=BIGINT},
+      reg_channel = #{regChannel,jdbcType=TINYINT},
+      reg_time = #{regTime,jdbcType=BIGINT},
+      active_time = #{activeTime,jdbcType=BIGINT},
+      active_type = #{activeType,jdbcType=TINYINT},
+      qq = #{qq,jdbcType=VARCHAR},
+      level = #{level,jdbcType=TINYINT},
+      grow_score = #{growScore,jdbcType=INTEGER},
+      refer_id = #{referId,jdbcType=BIGINT},
+      sex = #{sex,jdbcType=TINYINT},
+      birthday = #{birthday,jdbcType=DATE},
+      area_code = #{areaCode,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

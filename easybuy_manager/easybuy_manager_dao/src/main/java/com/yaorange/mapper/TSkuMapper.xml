@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaorange.mapper.TSkuMapper">
+    <resultMap id="BaseResultMap" type="com.yaorange.pojo.TSku">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="update_time" property="updateTime" jdbcType="BIGINT"/>
+        <result column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="sku_code" property="skuCode" jdbcType="CHAR"/>
+        <result column="sku_name" property="skuName" jdbcType="VARCHAR"/>
+        <result column="market_price" property="marketPrice" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="INTEGER"/>
+        <result column="cost_price" property="costPrice" jdbcType="INTEGER"/>
+        <result column="sale_count" property="saleCount" jdbcType="INTEGER"/>
+        <result column="sort_index" property="sortIndex" jdbcType="INTEGER"/>
+        <result column="available_stock" property="availableStock" jdbcType="INTEGER"/>
+        <result column="frozen_stock" property="frozenStock" jdbcType="INTEGER"/>
+        <result column="sku_properties" property="skuProperties" jdbcType="VARCHAR"/>
+        <result column="sku_main_pic" property="skuMainPic" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, create_time, update_time, product_id, sku_code, sku_name, market_price, price,
+    cost_price, sale_count, sort_index, available_stock, frozen_stock, sku_properties,
+    sku_main_pic
+  </sql>
+    <!--根据pid查最大code-->
+    <select id="selectMaxSkuCodeByProductId" resultType="string" parameterType="java.lang.Long">
+    SELECT max(sku_code) from t_sku where product_id = #{id}
+  </select>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yaorange.pojo.TSkuExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_sku
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_sku
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_sku
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.yaorange.pojo.TSkuExample">
+        delete from t_sku
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.yaorange.pojo.TSku">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_sku (id, create_time, update_time,
+        product_id, sku_code, sku_name,
+        market_price, price, cost_price,
+        sale_count, sort_index, available_stock,
+        frozen_stock, sku_properties, sku_main_pic
+        )
+        values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT},
+        #{productId,jdbcType=BIGINT}, #{skuCode,jdbcType=CHAR}, #{skuName,jdbcType=VARCHAR},
+        #{marketPrice,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{costPrice,jdbcType=INTEGER},
+        #{saleCount,jdbcType=INTEGER}, #{sortIndex,jdbcType=INTEGER}, #{availableStock,jdbcType=INTEGER},
+        #{frozenStock,jdbcType=INTEGER}, #{skuProperties,jdbcType=VARCHAR}, #{skuMainPic,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.yaorange.pojo.TSku">
+        insert into t_sku
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="skuCode != null">
+                sku_code,
+            </if>
+            <if test="skuName != null">
+                sku_name,
+            </if>
+            <if test="marketPrice != null">
+                market_price,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="costPrice != null">
+                cost_price,
+            </if>
+            <if test="saleCount != null">
+                sale_count,
+            </if>
+            <if test="sortIndex != null">
+                sort_index,
+            </if>
+            <if test="availableStock != null">
+                available_stock,
+            </if>
+            <if test="frozenStock != null">
+                frozen_stock,
+            </if>
+            <if test="skuProperties != null">
+                sku_properties,
+            </if>
+            <if test="skuMainPic != null">
+                sku_main_pic,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=BIGINT},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="skuCode != null">
+                #{skuCode,jdbcType=CHAR},
+            </if>
+            <if test="skuName != null">
+                #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="marketPrice != null">
+                #{marketPrice,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=INTEGER},
+            </if>
+            <if test="costPrice != null">
+                #{costPrice,jdbcType=INTEGER},
+            </if>
+            <if test="saleCount != null">
+                #{saleCount,jdbcType=INTEGER},
+            </if>
+            <if test="sortIndex != null">
+                #{sortIndex,jdbcType=INTEGER},
+            </if>
+            <if test="availableStock != null">
+                #{availableStock,jdbcType=INTEGER},
+            </if>
+            <if test="frozenStock != null">
+                #{frozenStock,jdbcType=INTEGER},
+            </if>
+            <if test="skuProperties != null">
+                #{skuProperties,jdbcType=VARCHAR},
+            </if>
+            <if test="skuMainPic != null">
+                #{skuMainPic,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.yaorange.pojo.TSkuExample" resultType="java.lang.Integer">
+        select count(*) from t_sku
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+
+    <!--更新商品价格-->
+    <update id="updateProductPrice" parameterType="map">
+         UPDATE t_product
+        SET max_price= (
+            SELECT
+                MAX(price)
+            FROM
+                t_sku where id = #{id}
+        ),
+         min_price= (
+            SELECT
+                MIN(price)
+            FROM
+                t_sku
+            WHERE
+                id = #{id}
+        )where id =#{productId}
+    </update>
+
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_sku
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=BIGINT},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=BIGINT},
+            </if>
+            <if test="record.productId != null">
+                product_id = #{record.productId,jdbcType=BIGINT},
+            </if>
+            <if test="record.skuCode != null">
+                sku_code = #{record.skuCode,jdbcType=CHAR},
+            </if>
+            <if test="record.skuName != null">
+                sku_name = #{record.skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.marketPrice != null">
+                market_price = #{record.marketPrice,jdbcType=INTEGER},
+            </if>
+            <if test="record.price != null">
+                price = #{record.price,jdbcType=INTEGER},
+            </if>
+            <if test="record.costPrice != null">
+                cost_price = #{record.costPrice,jdbcType=INTEGER},
+            </if>
+            <if test="record.saleCount != null">
+                sale_count = #{record.saleCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.sortIndex != null">
+                sort_index = #{record.sortIndex,jdbcType=INTEGER},
+            </if>
+            <if test="record.availableStock != null">
+                available_stock = #{record.availableStock,jdbcType=INTEGER},
+            </if>
+            <if test="record.frozenStock != null">
+                frozen_stock = #{record.frozenStock,jdbcType=INTEGER},
+            </if>
+            <if test="record.skuProperties != null">
+                sku_properties = #{record.skuProperties,jdbcType=VARCHAR},
+            </if>
+            <if test="record.skuMainPic != null">
+                sku_main_pic = #{record.skuMainPic,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_sku
+        set id = #{record.id,jdbcType=BIGINT},
+        create_time = #{record.createTime,jdbcType=BIGINT},
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+        product_id = #{record.productId,jdbcType=BIGINT},
+        sku_code = #{record.skuCode,jdbcType=CHAR},
+        sku_name = #{record.skuName,jdbcType=VARCHAR},
+        market_price = #{record.marketPrice,jdbcType=INTEGER},
+        price = #{record.price,jdbcType=INTEGER},
+        cost_price = #{record.costPrice,jdbcType=INTEGER},
+        sale_count = #{record.saleCount,jdbcType=INTEGER},
+        sort_index = #{record.sortIndex,jdbcType=INTEGER},
+        available_stock = #{record.availableStock,jdbcType=INTEGER},
+        frozen_stock = #{record.frozenStock,jdbcType=INTEGER},
+        sku_properties = #{record.skuProperties,jdbcType=VARCHAR},
+        sku_main_pic = #{record.skuMainPic,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yaorange.pojo.TSku">
+        update t_sku
+        <set>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=BIGINT},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="skuCode != null">
+                sku_code = #{skuCode,jdbcType=CHAR},
+            </if>
+            <if test="skuName != null">
+                sku_name = #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="marketPrice != null">
+                market_price = #{marketPrice,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=INTEGER},
+            </if>
+            <if test="costPrice != null">
+                cost_price = #{costPrice,jdbcType=INTEGER},
+            </if>
+            <if test="saleCount != null">
+                sale_count = #{saleCount,jdbcType=INTEGER},
+            </if>
+            <if test="sortIndex != null">
+                sort_index = #{sortIndex,jdbcType=INTEGER},
+            </if>
+            <if test="availableStock != null">
+                available_stock = #{availableStock,jdbcType=INTEGER},
+            </if>
+            <if test="frozenStock != null">
+                frozen_stock = #{frozenStock,jdbcType=INTEGER},
+            </if>
+            <if test="skuProperties != null">
+                sku_properties = #{skuProperties,jdbcType=VARCHAR},
+            </if>
+            <if test="skuMainPic != null">
+                sku_main_pic = #{skuMainPic,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yaorange.pojo.TSku">
+    update t_sku
+    set create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      sku_code = #{skuCode,jdbcType=CHAR},
+      sku_name = #{skuName,jdbcType=VARCHAR},
+      market_price = #{marketPrice,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      cost_price = #{costPrice,jdbcType=INTEGER},
+      sale_count = #{saleCount,jdbcType=INTEGER},
+      sort_index = #{sortIndex,jdbcType=INTEGER},
+      available_stock = #{availableStock,jdbcType=INTEGER},
+      frozen_stock = #{frozenStock,jdbcType=INTEGER},
+      sku_properties = #{skuProperties,jdbcType=VARCHAR},
+      sku_main_pic = #{skuMainPic,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaorange.mapper.TOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.yaorange.pojo.TOrder" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="sso_id" property="ssoId" jdbcType="BIGINT" />
+    <result column="order_sn" property="orderSn" jdbcType="CHAR" />
+    <result column="store_id" property="storeId" jdbcType="BIGINT" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="leaveword" property="leaveword" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="carriage_fee" property="carriageFee" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="total_money" property="totalMoney" jdbcType="INTEGER" />
+    <result column="discount_money" property="discountMoney" jdbcType="CHAR" />
+    <result column="real_money" property="realMoney" jdbcType="INTEGER" />
+    <result column="pay_money" property="payMoney" jdbcType="INTEGER" />
+    <result column="pay_channel" property="payChannel" jdbcType="TINYINT" />
+    <result column="pay_time" property="payTime" jdbcType="BIGINT" />
+    <result column="coupon_id" property="couponId" jdbcType="BIGINT" />
+    <result column="coupon_money" property="couponMoney" jdbcType="INTEGER" />
+    <result column="promotion_id" property="promotionId" jdbcType="BIGINT" />
+    <result column="promotion_money" property="promotionMoney" jdbcType="INTEGER" />
+    <result column="order_from" property="orderFrom" jdbcType="TINYINT" />
+    <result column="finished_time" property="finishedTime" jdbcType="BIGINT" />
+    <result column="comment_status" property="commentStatus" jdbcType="TINYINT" />
+    <result column="comment_time" property="commentTime" jdbcType="BIGINT" />
+    <result column="ship_store" property="shipStore" jdbcType="BIGINT" />
+    <result column="ship_sn" property="shipSn" jdbcType="VARCHAR" />
+    <result column="ship_time" property="shipTime" jdbcType="VARCHAR" />
+    <result column="ship_send_time" property="shipSendTime" jdbcType="BIGINT" />
+    <result column="digest" property="digest" jdbcType="VARCHAR" />
+    <result column="sale_return_state" property="saleReturnState" jdbcType="TINYINT" />
+    <result column="return_order_sn" property="returnOrderSn" jdbcType="CHAR" />
+    <result column="change_order_sn" property="changeOrderSn" jdbcType="CHAR" />
+    <result column="need_bill" property="needBill" jdbcType="TINYINT" />
+    <result column="last_pay_time" property="lastPayTime" jdbcType="BIGINT" />
+    <result column="last_confirm_ship_time" property="lastConfirmShipTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, create_time, update_time, sso_id, order_sn, store_id, store_name, leaveword,
+    state, carriage_fee, remark, total_money, discount_money, real_money, pay_money,
+    pay_channel, pay_time, coupon_id, coupon_money, promotion_id, promotion_money, order_from,
+    finished_time, comment_status, comment_time, ship_store, ship_sn, ship_time, ship_send_time,
+    digest, sale_return_state, return_order_sn, change_order_sn, need_bill, last_pay_time,
+    last_confirm_ship_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yaorange.pojo.TOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yaorange.pojo.TOrderExample" >
+    delete from t_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yaorange.pojo.TOrder" >
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_order (id, create_time, update_time,
+      sso_id, order_sn, store_id,
+      store_name, leaveword, state,
+      carriage_fee, remark, total_money,
+      discount_money, real_money, pay_money,
+      pay_channel, pay_time, coupon_id,
+      coupon_money, promotion_id, promotion_money,
+      order_from, finished_time, comment_status,
+      comment_time, ship_store, ship_sn,
+      ship_time, ship_send_time, digest,
+      sale_return_state, return_order_sn, change_order_sn,
+      need_bill, last_pay_time, last_confirm_ship_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT},
+      #{ssoId,jdbcType=BIGINT}, #{orderSn,jdbcType=CHAR}, #{storeId,jdbcType=BIGINT},
+      #{storeName,jdbcType=VARCHAR}, #{leaveword,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT},
+      #{carriageFee,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{totalMoney,jdbcType=INTEGER},
+      #{discountMoney,jdbcType=CHAR}, #{realMoney,jdbcType=INTEGER}, #{payMoney,jdbcType=INTEGER},
+      #{payChannel,jdbcType=TINYINT}, #{payTime,jdbcType=BIGINT}, #{couponId,jdbcType=BIGINT},
+      #{couponMoney,jdbcType=INTEGER}, #{promotionId,jdbcType=BIGINT}, #{promotionMoney,jdbcType=INTEGER},
+      #{orderFrom,jdbcType=TINYINT}, #{finishedTime,jdbcType=BIGINT}, #{commentStatus,jdbcType=TINYINT},
+      #{commentTime,jdbcType=BIGINT}, #{shipStore,jdbcType=BIGINT}, #{shipSn,jdbcType=VARCHAR},
+      #{shipTime,jdbcType=VARCHAR}, #{shipSendTime,jdbcType=BIGINT}, #{digest,jdbcType=VARCHAR},
+      #{saleReturnState,jdbcType=TINYINT}, #{returnOrderSn,jdbcType=CHAR}, #{changeOrderSn,jdbcType=CHAR},
+      #{needBill,jdbcType=TINYINT}, #{lastPayTime,jdbcType=BIGINT}, #{lastConfirmShipTime,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yaorange.pojo.TOrder" >
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="ssoId != null" >
+        sso_id,
+      </if>
+      <if test="orderSn != null" >
+        order_sn,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="storeName != null" >
+        store_name,
+      </if>
+      <if test="leaveword != null" >
+        leaveword,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="carriageFee != null" >
+        carriage_fee,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="totalMoney != null" >
+        total_money,
+      </if>
+      <if test="discountMoney != null" >
+        discount_money,
+      </if>
+      <if test="realMoney != null" >
+        real_money,
+      </if>
+      <if test="payMoney != null" >
+        pay_money,
+      </if>
+      <if test="payChannel != null" >
+        pay_channel,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="couponId != null" >
+        coupon_id,
+      </if>
+      <if test="couponMoney != null" >
+        coupon_money,
+      </if>
+      <if test="promotionId != null" >
+        promotion_id,
+      </if>
+      <if test="promotionMoney != null" >
+        promotion_money,
+      </if>
+      <if test="orderFrom != null" >
+        order_from,
+      </if>
+      <if test="finishedTime != null" >
+        finished_time,
+      </if>
+      <if test="commentStatus != null" >
+        comment_status,
+      </if>
+      <if test="commentTime != null" >
+        comment_time,
+      </if>
+      <if test="shipStore != null" >
+        ship_store,
+      </if>
+      <if test="shipSn != null" >
+        ship_sn,
+      </if>
+      <if test="shipTime != null" >
+        ship_time,
+      </if>
+      <if test="shipSendTime != null" >
+        ship_send_time,
+      </if>
+      <if test="digest != null" >
+        digest,
+      </if>
+      <if test="saleReturnState != null" >
+        sale_return_state,
+      </if>
+      <if test="returnOrderSn != null" >
+        return_order_sn,
+      </if>
+      <if test="changeOrderSn != null" >
+        change_order_sn,
+      </if>
+      <if test="needBill != null" >
+        need_bill,
+      </if>
+      <if test="lastPayTime != null" >
+        last_pay_time,
+      </if>
+      <if test="lastConfirmShipTime != null" >
+        last_confirm_ship_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="ssoId != null" >
+        #{ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="orderSn != null" >
+        #{orderSn,jdbcType=CHAR},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="storeName != null" >
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveword != null" >
+        #{leaveword,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="carriageFee != null" >
+        #{carriageFee,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="totalMoney != null" >
+        #{totalMoney,jdbcType=INTEGER},
+      </if>
+      <if test="discountMoney != null" >
+        #{discountMoney,jdbcType=CHAR},
+      </if>
+      <if test="realMoney != null" >
+        #{realMoney,jdbcType=INTEGER},
+      </if>
+      <if test="payMoney != null" >
+        #{payMoney,jdbcType=INTEGER},
+      </if>
+      <if test="payChannel != null" >
+        #{payChannel,jdbcType=TINYINT},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=BIGINT},
+      </if>
+      <if test="couponId != null" >
+        #{couponId,jdbcType=BIGINT},
+      </if>
+      <if test="couponMoney != null" >
+        #{couponMoney,jdbcType=INTEGER},
+      </if>
+      <if test="promotionId != null" >
+        #{promotionId,jdbcType=BIGINT},
+      </if>
+      <if test="promotionMoney != null" >
+        #{promotionMoney,jdbcType=INTEGER},
+      </if>
+      <if test="orderFrom != null" >
+        #{orderFrom,jdbcType=TINYINT},
+      </if>
+      <if test="finishedTime != null" >
+        #{finishedTime,jdbcType=BIGINT},
+      </if>
+      <if test="commentStatus != null" >
+        #{commentStatus,jdbcType=TINYINT},
+      </if>
+      <if test="commentTime != null" >
+        #{commentTime,jdbcType=BIGINT},
+      </if>
+      <if test="shipStore != null" >
+        #{shipStore,jdbcType=BIGINT},
+      </if>
+      <if test="shipSn != null" >
+        #{shipSn,jdbcType=VARCHAR},
+      </if>
+      <if test="shipTime != null" >
+        #{shipTime,jdbcType=VARCHAR},
+      </if>
+      <if test="shipSendTime != null" >
+        #{shipSendTime,jdbcType=BIGINT},
+      </if>
+      <if test="digest != null" >
+        #{digest,jdbcType=VARCHAR},
+      </if>
+      <if test="saleReturnState != null" >
+        #{saleReturnState,jdbcType=TINYINT},
+      </if>
+      <if test="returnOrderSn != null" >
+        #{returnOrderSn,jdbcType=CHAR},
+      </if>
+      <if test="changeOrderSn != null" >
+        #{changeOrderSn,jdbcType=CHAR},
+      </if>
+      <if test="needBill != null" >
+        #{needBill,jdbcType=TINYINT},
+      </if>
+      <if test="lastPayTime != null" >
+        #{lastPayTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastConfirmShipTime != null" >
+        #{lastConfirmShipTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yaorange.pojo.TOrderExample" resultType="java.lang.Integer" >
+    select count(*) from t_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.ssoId != null" >
+        sso_id = #{record.ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderSn != null" >
+        order_sn = #{record.orderSn,jdbcType=CHAR},
+      </if>
+      <if test="record.storeId != null" >
+        store_id = #{record.storeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.storeName != null" >
+        store_name = #{record.storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leaveword != null" >
+        leaveword = #{record.leaveword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=TINYINT},
+      </if>
+      <if test="record.carriageFee != null" >
+        carriage_fee = #{record.carriageFee,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalMoney != null" >
+        total_money = #{record.totalMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.discountMoney != null" >
+        discount_money = #{record.discountMoney,jdbcType=CHAR},
+      </if>
+      <if test="record.realMoney != null" >
+        real_money = #{record.realMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.payMoney != null" >
+        pay_money = #{record.payMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.payChannel != null" >
+        pay_channel = #{record.payChannel,jdbcType=TINYINT},
+      </if>
+      <if test="record.payTime != null" >
+        pay_time = #{record.payTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.couponId != null" >
+        coupon_id = #{record.couponId,jdbcType=BIGINT},
+      </if>
+      <if test="record.couponMoney != null" >
+        coupon_money = #{record.couponMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.promotionId != null" >
+        promotion_id = #{record.promotionId,jdbcType=BIGINT},
+      </if>
+      <if test="record.promotionMoney != null" >
+        promotion_money = #{record.promotionMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderFrom != null" >
+        order_from = #{record.orderFrom,jdbcType=TINYINT},
+      </if>
+      <if test="record.finishedTime != null" >
+        finished_time = #{record.finishedTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.commentStatus != null" >
+        comment_status = #{record.commentStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.commentTime != null" >
+        comment_time = #{record.commentTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.shipStore != null" >
+        ship_store = #{record.shipStore,jdbcType=BIGINT},
+      </if>
+      <if test="record.shipSn != null" >
+        ship_sn = #{record.shipSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipTime != null" >
+        ship_time = #{record.shipTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipSendTime != null" >
+        ship_send_time = #{record.shipSendTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.digest != null" >
+        digest = #{record.digest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleReturnState != null" >
+        sale_return_state = #{record.saleReturnState,jdbcType=TINYINT},
+      </if>
+      <if test="record.returnOrderSn != null" >
+        return_order_sn = #{record.returnOrderSn,jdbcType=CHAR},
+      </if>
+      <if test="record.changeOrderSn != null" >
+        change_order_sn = #{record.changeOrderSn,jdbcType=CHAR},
+      </if>
+      <if test="record.needBill != null" >
+        need_bill = #{record.needBill,jdbcType=TINYINT},
+      </if>
+      <if test="record.lastPayTime != null" >
+        last_pay_time = #{record.lastPayTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastConfirmShipTime != null" >
+        last_confirm_ship_time = #{record.lastConfirmShipTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_order
+    set id = #{record.id,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT},
+      sso_id = #{record.ssoId,jdbcType=BIGINT},
+      order_sn = #{record.orderSn,jdbcType=CHAR},
+      store_id = #{record.storeId,jdbcType=BIGINT},
+      store_name = #{record.storeName,jdbcType=VARCHAR},
+      leaveword = #{record.leaveword,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=TINYINT},
+      carriage_fee = #{record.carriageFee,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      total_money = #{record.totalMoney,jdbcType=INTEGER},
+      discount_money = #{record.discountMoney,jdbcType=CHAR},
+      real_money = #{record.realMoney,jdbcType=INTEGER},
+      pay_money = #{record.payMoney,jdbcType=INTEGER},
+      pay_channel = #{record.payChannel,jdbcType=TINYINT},
+      pay_time = #{record.payTime,jdbcType=BIGINT},
+      coupon_id = #{record.couponId,jdbcType=BIGINT},
+      coupon_money = #{record.couponMoney,jdbcType=INTEGER},
+      promotion_id = #{record.promotionId,jdbcType=BIGINT},
+      promotion_money = #{record.promotionMoney,jdbcType=INTEGER},
+      order_from = #{record.orderFrom,jdbcType=TINYINT},
+      finished_time = #{record.finishedTime,jdbcType=BIGINT},
+      comment_status = #{record.commentStatus,jdbcType=TINYINT},
+      comment_time = #{record.commentTime,jdbcType=BIGINT},
+      ship_store = #{record.shipStore,jdbcType=BIGINT},
+      ship_sn = #{record.shipSn,jdbcType=VARCHAR},
+      ship_time = #{record.shipTime,jdbcType=VARCHAR},
+      ship_send_time = #{record.shipSendTime,jdbcType=BIGINT},
+      digest = #{record.digest,jdbcType=VARCHAR},
+      sale_return_state = #{record.saleReturnState,jdbcType=TINYINT},
+      return_order_sn = #{record.returnOrderSn,jdbcType=CHAR},
+      change_order_sn = #{record.changeOrderSn,jdbcType=CHAR},
+      need_bill = #{record.needBill,jdbcType=TINYINT},
+      last_pay_time = #{record.lastPayTime,jdbcType=BIGINT},
+      last_confirm_ship_time = #{record.lastConfirmShipTime,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yaorange.pojo.TOrder" >
+    update t_order
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="ssoId != null" >
+        sso_id = #{ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="orderSn != null" >
+        order_sn = #{orderSn,jdbcType=CHAR},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="storeName != null" >
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveword != null" >
+        leaveword = #{leaveword,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="carriageFee != null" >
+        carriage_fee = #{carriageFee,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="totalMoney != null" >
+        total_money = #{totalMoney,jdbcType=INTEGER},
+      </if>
+      <if test="discountMoney != null" >
+        discount_money = #{discountMoney,jdbcType=CHAR},
+      </if>
+      <if test="realMoney != null" >
+        real_money = #{realMoney,jdbcType=INTEGER},
+      </if>
+      <if test="payMoney != null" >
+        pay_money = #{payMoney,jdbcType=INTEGER},
+      </if>
+      <if test="payChannel != null" >
+        pay_channel = #{payChannel,jdbcType=TINYINT},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=BIGINT},
+      </if>
+      <if test="couponId != null" >
+        coupon_id = #{couponId,jdbcType=BIGINT},
+      </if>
+      <if test="couponMoney != null" >
+        coupon_money = #{couponMoney,jdbcType=INTEGER},
+      </if>
+      <if test="promotionId != null" >
+        promotion_id = #{promotionId,jdbcType=BIGINT},
+      </if>
+      <if test="promotionMoney != null" >
+        promotion_money = #{promotionMoney,jdbcType=INTEGER},
+      </if>
+      <if test="orderFrom != null" >
+        order_from = #{orderFrom,jdbcType=TINYINT},
+      </if>
+      <if test="finishedTime != null" >
+        finished_time = #{finishedTime,jdbcType=BIGINT},
+      </if>
+      <if test="commentStatus != null" >
+        comment_status = #{commentStatus,jdbcType=TINYINT},
+      </if>
+      <if test="commentTime != null" >
+        comment_time = #{commentTime,jdbcType=BIGINT},
+      </if>
+      <if test="shipStore != null" >
+        ship_store = #{shipStore,jdbcType=BIGINT},
+      </if>
+      <if test="shipSn != null" >
+        ship_sn = #{shipSn,jdbcType=VARCHAR},
+      </if>
+      <if test="shipTime != null" >
+        ship_time = #{shipTime,jdbcType=VARCHAR},
+      </if>
+      <if test="shipSendTime != null" >
+        ship_send_time = #{shipSendTime,jdbcType=BIGINT},
+      </if>
+      <if test="digest != null" >
+        digest = #{digest,jdbcType=VARCHAR},
+      </if>
+      <if test="saleReturnState != null" >
+        sale_return_state = #{saleReturnState,jdbcType=TINYINT},
+      </if>
+      <if test="returnOrderSn != null" >
+        return_order_sn = #{returnOrderSn,jdbcType=CHAR},
+      </if>
+      <if test="changeOrderSn != null" >
+        change_order_sn = #{changeOrderSn,jdbcType=CHAR},
+      </if>
+      <if test="needBill != null" >
+        need_bill = #{needBill,jdbcType=TINYINT},
+      </if>
+      <if test="lastPayTime != null" >
+        last_pay_time = #{lastPayTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastConfirmShipTime != null" >
+        last_confirm_ship_time = #{lastConfirmShipTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yaorange.pojo.TOrder" >
+    update t_order
+    set create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      sso_id = #{ssoId,jdbcType=BIGINT},
+      order_sn = #{orderSn,jdbcType=CHAR},
+      store_id = #{storeId,jdbcType=BIGINT},
+      store_name = #{storeName,jdbcType=VARCHAR},
+      leaveword = #{leaveword,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      carriage_fee = #{carriageFee,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      total_money = #{totalMoney,jdbcType=INTEGER},
+      discount_money = #{discountMoney,jdbcType=CHAR},
+      real_money = #{realMoney,jdbcType=INTEGER},
+      pay_money = #{payMoney,jdbcType=INTEGER},
+      pay_channel = #{payChannel,jdbcType=TINYINT},
+      pay_time = #{payTime,jdbcType=BIGINT},
+      coupon_id = #{couponId,jdbcType=BIGINT},
+      coupon_money = #{couponMoney,jdbcType=INTEGER},
+      promotion_id = #{promotionId,jdbcType=BIGINT},
+      promotion_money = #{promotionMoney,jdbcType=INTEGER},
+      order_from = #{orderFrom,jdbcType=TINYINT},
+      finished_time = #{finishedTime,jdbcType=BIGINT},
+      comment_status = #{commentStatus,jdbcType=TINYINT},
+      comment_time = #{commentTime,jdbcType=BIGINT},
+      ship_store = #{shipStore,jdbcType=BIGINT},
+      ship_sn = #{shipSn,jdbcType=VARCHAR},
+      ship_time = #{shipTime,jdbcType=VARCHAR},
+      ship_send_time = #{shipSendTime,jdbcType=BIGINT},
+      digest = #{digest,jdbcType=VARCHAR},
+      sale_return_state = #{saleReturnState,jdbcType=TINYINT},
+      return_order_sn = #{returnOrderSn,jdbcType=CHAR},
+      change_order_sn = #{changeOrderSn,jdbcType=CHAR},
+      need_bill = #{needBill,jdbcType=TINYINT},
+      last_pay_time = #{lastPayTime,jdbcType=BIGINT},
+      last_confirm_ship_time = #{lastConfirmShipTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

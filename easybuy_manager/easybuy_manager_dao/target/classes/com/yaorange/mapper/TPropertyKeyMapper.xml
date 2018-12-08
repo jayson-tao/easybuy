@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaorange.mapper.TPropertyKeyMapper" >
+  <resultMap id="BaseResultMap" type="com.yaorange.pojo.TPropertyKey" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="property_key" property="propertyKey" jdbcType="VARCHAR" />
+    <result column="product_type" property="productType" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="input_mode" property="inputMode" jdbcType="TINYINT" />
+    <result column="input_type" property="inputType" jdbcType="TINYINT" />
+    <result column="validate_pattern" property="validatePattern" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, create_time, update_time, property_key, product_type, type, input_mode, input_type,
+    validate_pattern, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yaorange.pojo.TPropertyKeyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_property_key
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <!--查询商品对应的属性-->
+  <select id="findPropertyKeys" resultMap="BaseResultMap" parameterType="map" >
+    select
+      b.*
+    FROM
+    t_product_property a
+    JOIN t_property_key b ON a.property_key_id = b.id
+    WHERE
+    product_id = #{productId}
+    <if test="type != null" >
+     and type = #{type}
+    </if>
+
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_property_key
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_property_key
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yaorange.pojo.TPropertyKeyExample" >
+    delete from t_property_key
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yaorange.pojo.TPropertyKey" >
+    insert into t_property_key (id, create_time, update_time,
+      property_key, product_type, type,
+      input_mode, input_type, validate_pattern,
+      remark)
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT},
+      #{propertyKey,jdbcType=VARCHAR}, #{productType,jdbcType=BIGINT}, #{type,jdbcType=TINYINT},
+      #{inputMode,jdbcType=TINYINT}, #{inputType,jdbcType=TINYINT}, #{validatePattern,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yaorange.pojo.TPropertyKey" >
+    insert into t_property_key
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="propertyKey != null" >
+        property_key,
+      </if>
+      <if test="productType != null" >
+        product_type,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="inputMode != null" >
+        input_mode,
+      </if>
+      <if test="inputType != null" >
+        input_type,
+      </if>
+      <if test="validatePattern != null" >
+        validate_pattern,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="propertyKey != null" >
+        #{propertyKey,jdbcType=VARCHAR},
+      </if>
+      <if test="productType != null" >
+        #{productType,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="inputMode != null" >
+        #{inputMode,jdbcType=TINYINT},
+      </if>
+      <if test="inputType != null" >
+        #{inputType,jdbcType=TINYINT},
+      </if>
+      <if test="validatePattern != null" >
+        #{validatePattern,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yaorange.pojo.TPropertyKeyExample" resultType="java.lang.Integer" >
+    select count(*) from t_property_key
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_property_key
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.propertyKey != null" >
+        property_key = #{record.propertyKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productType != null" >
+        product_type = #{record.productType,jdbcType=BIGINT},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.inputMode != null" >
+        input_mode = #{record.inputMode,jdbcType=TINYINT},
+      </if>
+      <if test="record.inputType != null" >
+        input_type = #{record.inputType,jdbcType=TINYINT},
+      </if>
+      <if test="record.validatePattern != null" >
+        validate_pattern = #{record.validatePattern,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_property_key
+    set id = #{record.id,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT},
+      property_key = #{record.propertyKey,jdbcType=VARCHAR},
+      product_type = #{record.productType,jdbcType=BIGINT},
+      type = #{record.type,jdbcType=TINYINT},
+      input_mode = #{record.inputMode,jdbcType=TINYINT},
+      input_type = #{record.inputType,jdbcType=TINYINT},
+      validate_pattern = #{record.validatePattern,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yaorange.pojo.TPropertyKey" >
+    update t_property_key
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="propertyKey != null" >
+        property_key = #{propertyKey,jdbcType=VARCHAR},
+      </if>
+      <if test="productType != null" >
+        product_type = #{productType,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="inputMode != null" >
+        input_mode = #{inputMode,jdbcType=TINYINT},
+      </if>
+      <if test="inputType != null" >
+        input_type = #{inputType,jdbcType=TINYINT},
+      </if>
+      <if test="validatePattern != null" >
+        validate_pattern = #{validatePattern,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yaorange.pojo.TPropertyKey" >
+    update t_property_key
+    set create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      property_key = #{propertyKey,jdbcType=VARCHAR},
+      product_type = #{productType,jdbcType=BIGINT},
+      type = #{type,jdbcType=TINYINT},
+      input_mode = #{inputMode,jdbcType=TINYINT},
+      input_type = #{inputType,jdbcType=TINYINT},
+      validate_pattern = #{validatePattern,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

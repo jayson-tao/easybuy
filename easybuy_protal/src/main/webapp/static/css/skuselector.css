@@ -1,0 +1,49 @@
+﻿@charset "utf-8"; 
+
+/*规格弹框增加大图展示 _start*/
+.pop-choose-spec-header{ display: inline-block; width: 530px; height: auto; line-height: auto; background: #fff;}
+.pop-choose-spec-header img{ width: 100px; border: #f8f8f8 1px solid; border-radius: 4px; padding: 5px; background: #FFF; margin-top: -35px; margin-left: 15px; float: left;}
+.attribute-header-right{margin-left: 10px; margin-top: 15px; float: left; overflow: hidden; width: 70%;}
+.attribute-header-right span { display: block; width: 100%; overflow: hidden; color: #666; font-size: 12px; line-height: 120%; margin-bottom: 5px; white-space: nowrap; text-overflow: ellipsis;}
+.attribute-header-right span.goodprice { color: #f23030; font-size: 16px;}
+/*规格弹框增加大图展示 _end*/
+
+.pop-choose-spec-main{ margin-left: -225px;}
+.pop-choose-spec-con .dt,.pop-choose-spec-con .dd{ display: inline-block;}
+.pop-choose-spec-con .dd{ width: 430px;}
+.pop-choose-spec-con .choose-btn{ text-align: center;}
+.pop-choose-spec-con .choose-btn .btn{ margin-right: 5px;}
+.pop-choose-spec-con .choose-btn .btn:last-child{ margin-right: 0px;}
+/*规格弹框增加购物车加减数量 _start*/
+.pop-choose-spec-con .choose-btn .amount{ margin: 10px auto; text-align: left; display: inline-block;}
+.pop-choose-spec-con .choose-btn .amount dt{ text-align: right; float: left; width: 66px; color: #999; line-height: 30px; margin-right: 10px; margin-right: 10px;}
+.pop-choose-spec-con .choose-btn .amount dd{ width: 450px; float: left;}
+.pop-choose-spec-con .choose-btn .amount .amount-widget{ width: 150px; height: 30px; position: relative; display: inline-block;}
+.pop-choose-spec-con .choose-btn .amount .amount-widget .amount-input{ color: #666; font-size: 12px; margin: 0; height: 28px; border: 1px solid #ddd; width: 52px; line-height: 28px; text-align: center; position: absolute; left: 23px; top: 0px; padding: 0px; z-index: 2;}
+.pop-choose-spec-con .choose-btn .amount .amount-widget .amount-btn { width: 100px; height: 30px; display: inline-block; vertical-align: middle; position: relative; top: 0px;}
+.pop-choose-spec-con .choose-btn .amount .amount-widget .amount-minus { width: 22px; height: 28px; overflow: hidden; cursor: pointer; border: 1px solid #ddd; border-right: none; display: block; line-height: 28px;text-align: center; background: #f1f1f1; position: absolute; left: 0px;}
+.pop-choose-spec-con .choose-btn .amount .amount-widget .amount-plus { width: 22px; height: 28px; border: 1px solid #ddd; border-left: none; overflow: hidden; cursor: pointer; display: block; line-height: 28px; text-align: center; background: #f1f1f1; position: absolute; right: 0px;}
+.pop-choose-spec-con .choose-btn .amount .amount-widget .amount-btn i{ width: 22px; height: 23px; font-size: 14px; color: #666; display: inline-block;}
+.pop-choose-spec-con .choose-btn .amount .amount-widget .amount-unit { vertical-align: middle; margin-left: 5px;}
+/*规格弹框增加购物车加减数量 _end*/
+
+/*ajax之前加载效果*/
+.ajax-loading{ width: 100%; height: 30px; padding: 30px 0px; text-align: center;}
+.ajax-loading img{ width: 30px; height: 30px;}
+
+/*属性选择弹框*/
+.choose{ padding: 15px 0px; width: 530px;}
+.choose dl.attr{ padding-bottom: 6px; display: inline-block;}
+.choose dl.attr dt{ text-align: right; float: left; width: 66px; color: #999; margin-top: 10px; margin-right: 10px;}
+.choose dl dd{ width: 460px; float: left;}
+.choose dl.attr dd li{ float: left; position: relative; margin: 0 8px 4px 0; line-height: 28px; vertical-align: middle;}
+.choose dl.attr dd li a{ float: left; background-color: #fff; width: auto!important; min-width: 16px; padding: 3px 9px 2px; text-align: center; border: 1px solid #b8b7bd; color: #000; display: inline-block;}
+.choose dl.attr dd li.selected a{ border: 1px solid #fa4862; }
+.choose dl.attr dd li.selected i{ position: absolute; bottom: 0.8px; right: 1px; width: 12px; height: 12px; overflow: hidden; display: block; background: url(/static/css/goods-icon.png) no-repeat; background-position: 0px -20px;}
+.choose dl.attr dd li.invalid a{ border: #b8b7bd 1px dashed; background: #eee; cursor: not-allowed;}
+.choose dl.attr dd li a img, .choose dl.attr dd li a span{ float: left; color: #666; height: 30px; vertical-align: middle;}
+.choose dl.attr dd li a img{ margin-right: 3px;}
+.attr-list { padding: 10px 0; margin: 0; max-height: 200px; overflow-y: auto;}
+.attr-list.attr-list-border{ border-width: 1px 0px 1px 0px; border-style: solid; border-color: #ddd; }
+.attr-btn{ text-align: center; padding: 10px 0px;}
+.attr-btn input{ margin: 0px 5px;}

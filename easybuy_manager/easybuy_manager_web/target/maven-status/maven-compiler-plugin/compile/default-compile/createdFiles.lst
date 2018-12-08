@@ -1,0 +1,10 @@
+com\yaorange\controller\SecKillController.class
+com\yaorange\controller\PropertyKeyController.class
+com\yaorange\controller\BrandController.class
+com\yaorange\controller\SkuController.class
+com\yaorange\controller\ConstController.class
+com\yaorange\controller\PropertyValueController.class
+com\yaorange\controller\MainController.class
+com\yaorange\controller\ProductTypeController.class
+com\yaorange\controller\ProductController.class
+com\yaorange\controller\QiniuController.class

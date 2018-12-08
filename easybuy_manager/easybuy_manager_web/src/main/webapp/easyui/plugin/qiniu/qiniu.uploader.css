@@ -1,0 +1,16 @@
+.btn{
+	display:inline-block;
+	padding:0 10px !important;
+	line-height:30px;
+}
+.btn-primary{
+	background:#0c80d7;
+}
+.btn-primary:hover{
+	background:#5757ff;
+}
+a.btn-primary span{color:#fff  !important;}
+.qiniuImageView span{cursor:pointer;border:solid 1px #e0e0e0;float:left;margin:3px;}
+.qiniuImageView span:hover{border:solid 1px #666;}
+.qiniuImageView span a{position:absolute;font-size:18px;color:#f00;}
+.qiniuImageView span a:hover{font-weight:bold;color:#fff;background:#f00;padding-left:3px; padding-right:3px;}

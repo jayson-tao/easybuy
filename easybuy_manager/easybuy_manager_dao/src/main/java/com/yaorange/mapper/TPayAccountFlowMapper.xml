@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaorange.mapper.TPayAccountFlowMapper" >
+  <resultMap id="BaseResultMap" type="com.yaorange.pojo.TPayAccountFlow" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="sso_id" property="ssoId" jdbcType="BIGINT" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="avilable_balance" property="avilableBalance" jdbcType="INTEGER" />
+    <result column="frozen_balance" property="frozenBalance" jdbcType="INTEGER" />
+    <result column="business_type" property="businessType" jdbcType="TINYINT" />
+    <result column="business_name" property="businessName" jdbcType="VARCHAR" />
+    <result column="business_key" property="businessKey" jdbcType="BIGINT" />
+    <result column="pay_channel" property="payChannel" jdbcType="TINYINT" />
+    <result column="pay_channel_name" property="payChannelName" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="digest" property="digest" jdbcType="VARCHAR" />
+    <result column="union_pay_seq" property="unionPaySeq" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, create_time, sso_id, nick_name, money, type, avilable_balance, frozen_balance, 
+    business_type, business_name, business_key, pay_channel, pay_channel_name, note, 
+    digest, union_pay_seq
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yaorange.pojo.TPayAccountFlowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_pay_account_flow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_pay_account_flow
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_pay_account_flow
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yaorange.pojo.TPayAccountFlowExample" >
+    delete from t_pay_account_flow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yaorange.pojo.TPayAccountFlow" >
+    insert into t_pay_account_flow (id, create_time, sso_id, 
+      nick_name, money, type, 
+      avilable_balance, frozen_balance, business_type, 
+      business_name, business_key, pay_channel, 
+      pay_channel_name, note, digest, 
+      union_pay_seq)
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, #{ssoId,jdbcType=BIGINT}, 
+      #{nickName,jdbcType=VARCHAR}, #{money,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
+      #{avilableBalance,jdbcType=INTEGER}, #{frozenBalance,jdbcType=INTEGER}, #{businessType,jdbcType=TINYINT}, 
+      #{businessName,jdbcType=VARCHAR}, #{businessKey,jdbcType=BIGINT}, #{payChannel,jdbcType=TINYINT}, 
+      #{payChannelName,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{digest,jdbcType=VARCHAR}, 
+      #{unionPaySeq,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yaorange.pojo.TPayAccountFlow" >
+    insert into t_pay_account_flow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="ssoId != null" >
+        sso_id,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="avilableBalance != null" >
+        avilable_balance,
+      </if>
+      <if test="frozenBalance != null" >
+        frozen_balance,
+      </if>
+      <if test="businessType != null" >
+        business_type,
+      </if>
+      <if test="businessName != null" >
+        business_name,
+      </if>
+      <if test="businessKey != null" >
+        business_key,
+      </if>
+      <if test="payChannel != null" >
+        pay_channel,
+      </if>
+      <if test="payChannelName != null" >
+        pay_channel_name,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="digest != null" >
+        digest,
+      </if>
+      <if test="unionPaySeq != null" >
+        union_pay_seq,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="ssoId != null" >
+        #{ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="avilableBalance != null" >
+        #{avilableBalance,jdbcType=INTEGER},
+      </if>
+      <if test="frozenBalance != null" >
+        #{frozenBalance,jdbcType=INTEGER},
+      </if>
+      <if test="businessType != null" >
+        #{businessType,jdbcType=TINYINT},
+      </if>
+      <if test="businessName != null" >
+        #{businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessKey != null" >
+        #{businessKey,jdbcType=BIGINT},
+      </if>
+      <if test="payChannel != null" >
+        #{payChannel,jdbcType=TINYINT},
+      </if>
+      <if test="payChannelName != null" >
+        #{payChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="digest != null" >
+        #{digest,jdbcType=VARCHAR},
+      </if>
+      <if test="unionPaySeq != null" >
+        #{unionPaySeq,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yaorange.pojo.TPayAccountFlowExample" resultType="java.lang.Integer" >
+    select count(*) from t_pay_account_flow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_pay_account_flow
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.ssoId != null" >
+        sso_id = #{record.ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="record.nickName != null" >
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.avilableBalance != null" >
+        avilable_balance = #{record.avilableBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.frozenBalance != null" >
+        frozen_balance = #{record.frozenBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.businessType != null" >
+        business_type = #{record.businessType,jdbcType=TINYINT},
+      </if>
+      <if test="record.businessName != null" >
+        business_name = #{record.businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessKey != null" >
+        business_key = #{record.businessKey,jdbcType=BIGINT},
+      </if>
+      <if test="record.payChannel != null" >
+        pay_channel = #{record.payChannel,jdbcType=TINYINT},
+      </if>
+      <if test="record.payChannelName != null" >
+        pay_channel_name = #{record.payChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.digest != null" >
+        digest = #{record.digest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unionPaySeq != null" >
+        union_pay_seq = #{record.unionPaySeq,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_pay_account_flow
+    set id = #{record.id,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      sso_id = #{record.ssoId,jdbcType=BIGINT},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=TINYINT},
+      avilable_balance = #{record.avilableBalance,jdbcType=INTEGER},
+      frozen_balance = #{record.frozenBalance,jdbcType=INTEGER},
+      business_type = #{record.businessType,jdbcType=TINYINT},
+      business_name = #{record.businessName,jdbcType=VARCHAR},
+      business_key = #{record.businessKey,jdbcType=BIGINT},
+      pay_channel = #{record.payChannel,jdbcType=TINYINT},
+      pay_channel_name = #{record.payChannelName,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR},
+      digest = #{record.digest,jdbcType=VARCHAR},
+      union_pay_seq = #{record.unionPaySeq,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yaorange.pojo.TPayAccountFlow" >
+    update t_pay_account_flow
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="ssoId != null" >
+        sso_id = #{ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="avilableBalance != null" >
+        avilable_balance = #{avilableBalance,jdbcType=INTEGER},
+      </if>
+      <if test="frozenBalance != null" >
+        frozen_balance = #{frozenBalance,jdbcType=INTEGER},
+      </if>
+      <if test="businessType != null" >
+        business_type = #{businessType,jdbcType=TINYINT},
+      </if>
+      <if test="businessName != null" >
+        business_name = #{businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessKey != null" >
+        business_key = #{businessKey,jdbcType=BIGINT},
+      </if>
+      <if test="payChannel != null" >
+        pay_channel = #{payChannel,jdbcType=TINYINT},
+      </if>
+      <if test="payChannelName != null" >
+        pay_channel_name = #{payChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="digest != null" >
+        digest = #{digest,jdbcType=VARCHAR},
+      </if>
+      <if test="unionPaySeq != null" >
+        union_pay_seq = #{unionPaySeq,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yaorange.pojo.TPayAccountFlow" >
+    update t_pay_account_flow
+    set create_time = #{createTime,jdbcType=BIGINT},
+      sso_id = #{ssoId,jdbcType=BIGINT},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      money = #{money,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      avilable_balance = #{avilableBalance,jdbcType=INTEGER},
+      frozen_balance = #{frozenBalance,jdbcType=INTEGER},
+      business_type = #{businessType,jdbcType=TINYINT},
+      business_name = #{businessName,jdbcType=VARCHAR},
+      business_key = #{businessKey,jdbcType=BIGINT},
+      pay_channel = #{payChannel,jdbcType=TINYINT},
+      pay_channel_name = #{payChannelName,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      digest = #{digest,jdbcType=VARCHAR},
+      union_pay_seq = #{unionPaySeq,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

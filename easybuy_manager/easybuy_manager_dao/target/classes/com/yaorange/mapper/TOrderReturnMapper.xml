@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaorange.mapper.TOrderReturnMapper" >
+  <resultMap id="BaseResultMap" type="com.yaorange.pojo.TOrderReturn" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="order_sn" property="orderSn" jdbcType="CHAR" />
+    <result column="return_sn" property="returnSn" jdbcType="CHAR" />
+    <result column="apply_time" property="applyTime" jdbcType="BIGINT" />
+    <result column="total_money" property="totalMoney" jdbcType="INTEGER" />
+    <result column="carriage_fee" property="carriageFee" jdbcType="INTEGER" />
+    <result column="real_money" property="realMoney" jdbcType="INTEGER" />
+    <result column="return_pay_money" property="returnPayMoney" jdbcType="INTEGER" />
+    <result column="sso_id" property="ssoId" jdbcType="BIGINT" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="pay_channel" property="payChannel" jdbcType="TINYINT" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="return_ship_store" property="returnShipStore" jdbcType="BIGINT" />
+    <result column="return_ship_sn" property="returnShipSn" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, create_time, update_time, order_id, order_sn, return_sn, apply_time, total_money, 
+    carriage_fee, real_money, return_pay_money, sso_id, reason, pay_channel, state, remark, 
+    return_ship_store, return_ship_sn
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yaorange.pojo.TOrderReturnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_order_return
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_return
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_order_return
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yaorange.pojo.TOrderReturnExample" >
+    delete from t_order_return
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yaorange.pojo.TOrderReturn" >
+    insert into t_order_return (id, create_time, update_time, 
+      order_id, order_sn, return_sn, 
+      apply_time, total_money, carriage_fee, 
+      real_money, return_pay_money, sso_id, 
+      reason, pay_channel, state, 
+      remark, return_ship_store, return_ship_sn
+      )
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{orderId,jdbcType=BIGINT}, #{orderSn,jdbcType=CHAR}, #{returnSn,jdbcType=CHAR}, 
+      #{applyTime,jdbcType=BIGINT}, #{totalMoney,jdbcType=INTEGER}, #{carriageFee,jdbcType=INTEGER}, 
+      #{realMoney,jdbcType=INTEGER}, #{returnPayMoney,jdbcType=INTEGER}, #{ssoId,jdbcType=BIGINT}, 
+      #{reason,jdbcType=VARCHAR}, #{payChannel,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
+      #{remark,jdbcType=VARCHAR}, #{returnShipStore,jdbcType=BIGINT}, #{returnShipSn,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yaorange.pojo.TOrderReturn" >
+    insert into t_order_return
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="orderSn != null" >
+        order_sn,
+      </if>
+      <if test="returnSn != null" >
+        return_sn,
+      </if>
+      <if test="applyTime != null" >
+        apply_time,
+      </if>
+      <if test="totalMoney != null" >
+        total_money,
+      </if>
+      <if test="carriageFee != null" >
+        carriage_fee,
+      </if>
+      <if test="realMoney != null" >
+        real_money,
+      </if>
+      <if test="returnPayMoney != null" >
+        return_pay_money,
+      </if>
+      <if test="ssoId != null" >
+        sso_id,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="payChannel != null" >
+        pay_channel,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="returnShipStore != null" >
+        return_ship_store,
+      </if>
+      <if test="returnShipSn != null" >
+        return_ship_sn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderSn != null" >
+        #{orderSn,jdbcType=CHAR},
+      </if>
+      <if test="returnSn != null" >
+        #{returnSn,jdbcType=CHAR},
+      </if>
+      <if test="applyTime != null" >
+        #{applyTime,jdbcType=BIGINT},
+      </if>
+      <if test="totalMoney != null" >
+        #{totalMoney,jdbcType=INTEGER},
+      </if>
+      <if test="carriageFee != null" >
+        #{carriageFee,jdbcType=INTEGER},
+      </if>
+      <if test="realMoney != null" >
+        #{realMoney,jdbcType=INTEGER},
+      </if>
+      <if test="returnPayMoney != null" >
+        #{returnPayMoney,jdbcType=INTEGER},
+      </if>
+      <if test="ssoId != null" >
+        #{ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannel != null" >
+        #{payChannel,jdbcType=TINYINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="returnShipStore != null" >
+        #{returnShipStore,jdbcType=BIGINT},
+      </if>
+      <if test="returnShipSn != null" >
+        #{returnShipSn,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yaorange.pojo.TOrderReturnExample" resultType="java.lang.Integer" >
+    select count(*) from t_order_return
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_order_return
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderSn != null" >
+        order_sn = #{record.orderSn,jdbcType=CHAR},
+      </if>
+      <if test="record.returnSn != null" >
+        return_sn = #{record.returnSn,jdbcType=CHAR},
+      </if>
+      <if test="record.applyTime != null" >
+        apply_time = #{record.applyTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.totalMoney != null" >
+        total_money = #{record.totalMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.carriageFee != null" >
+        carriage_fee = #{record.carriageFee,jdbcType=INTEGER},
+      </if>
+      <if test="record.realMoney != null" >
+        real_money = #{record.realMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.returnPayMoney != null" >
+        return_pay_money = #{record.returnPayMoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.ssoId != null" >
+        sso_id = #{record.ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payChannel != null" >
+        pay_channel = #{record.payChannel,jdbcType=TINYINT},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=TINYINT},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnShipStore != null" >
+        return_ship_store = #{record.returnShipStore,jdbcType=BIGINT},
+      </if>
+      <if test="record.returnShipSn != null" >
+        return_ship_sn = #{record.returnShipSn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_order_return
+    set id = #{record.id,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT},
+      order_id = #{record.orderId,jdbcType=BIGINT},
+      order_sn = #{record.orderSn,jdbcType=CHAR},
+      return_sn = #{record.returnSn,jdbcType=CHAR},
+      apply_time = #{record.applyTime,jdbcType=BIGINT},
+      total_money = #{record.totalMoney,jdbcType=INTEGER},
+      carriage_fee = #{record.carriageFee,jdbcType=INTEGER},
+      real_money = #{record.realMoney,jdbcType=INTEGER},
+      return_pay_money = #{record.returnPayMoney,jdbcType=INTEGER},
+      sso_id = #{record.ssoId,jdbcType=BIGINT},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      pay_channel = #{record.payChannel,jdbcType=TINYINT},
+      state = #{record.state,jdbcType=TINYINT},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      return_ship_store = #{record.returnShipStore,jdbcType=BIGINT},
+      return_ship_sn = #{record.returnShipSn,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yaorange.pojo.TOrderReturn" >
+    update t_order_return
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderSn != null" >
+        order_sn = #{orderSn,jdbcType=CHAR},
+      </if>
+      <if test="returnSn != null" >
+        return_sn = #{returnSn,jdbcType=CHAR},
+      </if>
+      <if test="applyTime != null" >
+        apply_time = #{applyTime,jdbcType=BIGINT},
+      </if>
+      <if test="totalMoney != null" >
+        total_money = #{totalMoney,jdbcType=INTEGER},
+      </if>
+      <if test="carriageFee != null" >
+        carriage_fee = #{carriageFee,jdbcType=INTEGER},
+      </if>
+      <if test="realMoney != null" >
+        real_money = #{realMoney,jdbcType=INTEGER},
+      </if>
+      <if test="returnPayMoney != null" >
+        return_pay_money = #{returnPayMoney,jdbcType=INTEGER},
+      </if>
+      <if test="ssoId != null" >
+        sso_id = #{ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannel != null" >
+        pay_channel = #{payChannel,jdbcType=TINYINT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="returnShipStore != null" >
+        return_ship_store = #{returnShipStore,jdbcType=BIGINT},
+      </if>
+      <if test="returnShipSn != null" >
+        return_ship_sn = #{returnShipSn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yaorange.pojo.TOrderReturn" >
+    update t_order_return
+    set create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      order_id = #{orderId,jdbcType=BIGINT},
+      order_sn = #{orderSn,jdbcType=CHAR},
+      return_sn = #{returnSn,jdbcType=CHAR},
+      apply_time = #{applyTime,jdbcType=BIGINT},
+      total_money = #{totalMoney,jdbcType=INTEGER},
+      carriage_fee = #{carriageFee,jdbcType=INTEGER},
+      real_money = #{realMoney,jdbcType=INTEGER},
+      return_pay_money = #{returnPayMoney,jdbcType=INTEGER},
+      sso_id = #{ssoId,jdbcType=BIGINT},
+      reason = #{reason,jdbcType=VARCHAR},
+      pay_channel = #{payChannel,jdbcType=TINYINT},
+      state = #{state,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      return_ship_store = #{returnShipStore,jdbcType=BIGINT},
+      return_ship_sn = #{returnShipSn,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

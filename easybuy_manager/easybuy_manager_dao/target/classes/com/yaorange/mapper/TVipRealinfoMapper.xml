@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaorange.mapper.TVipRealinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.yaorange.pojo.TVipRealinfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="sso_id" property="ssoId" jdbcType="BIGINT" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="id_card_no" property="idCardNo" jdbcType="VARCHAR" />
+    <result column="id_card_front" property="idCardFront" jdbcType="VARCHAR" />
+    <result column="id_card_back" property="idCardBack" jdbcType="VARCHAR" />
+    <result column="id_card_hand" property="idCardHand" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="apply_time" property="applyTime" jdbcType="BIGINT" />
+    <result column="audit_time" property="auditTime" jdbcType="BIGINT" />
+    <result column="audit_user" property="auditUser" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, create_time, update_time, sso_id, real_name, id_card_no, id_card_front, id_card_back, 
+    id_card_hand, state, apply_time, audit_time, audit_user, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yaorange.pojo.TVipRealinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_vip_realinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_vip_realinfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_vip_realinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yaorange.pojo.TVipRealinfoExample" >
+    delete from t_vip_realinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yaorange.pojo.TVipRealinfo" >
+    insert into t_vip_realinfo (id, create_time, update_time, 
+      sso_id, real_name, id_card_no, 
+      id_card_front, id_card_back, id_card_hand, 
+      state, apply_time, audit_time, 
+      audit_user, remark)
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{ssoId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{idCardNo,jdbcType=VARCHAR}, 
+      #{idCardFront,jdbcType=VARCHAR}, #{idCardBack,jdbcType=VARCHAR}, #{idCardHand,jdbcType=VARCHAR}, 
+      #{state,jdbcType=TINYINT}, #{applyTime,jdbcType=BIGINT}, #{auditTime,jdbcType=BIGINT}, 
+      #{auditUser,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yaorange.pojo.TVipRealinfo" >
+    insert into t_vip_realinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="ssoId != null" >
+        sso_id,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="idCardNo != null" >
+        id_card_no,
+      </if>
+      <if test="idCardFront != null" >
+        id_card_front,
+      </if>
+      <if test="idCardBack != null" >
+        id_card_back,
+      </if>
+      <if test="idCardHand != null" >
+        id_card_hand,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="applyTime != null" >
+        apply_time,
+      </if>
+      <if test="auditTime != null" >
+        audit_time,
+      </if>
+      <if test="auditUser != null" >
+        audit_user,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="ssoId != null" >
+        #{ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardNo != null" >
+        #{idCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardFront != null" >
+        #{idCardFront,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardBack != null" >
+        #{idCardBack,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardHand != null" >
+        #{idCardHand,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="applyTime != null" >
+        #{applyTime,jdbcType=BIGINT},
+      </if>
+      <if test="auditTime != null" >
+        #{auditTime,jdbcType=BIGINT},
+      </if>
+      <if test="auditUser != null" >
+        #{auditUser,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yaorange.pojo.TVipRealinfoExample" resultType="java.lang.Integer" >
+    select count(*) from t_vip_realinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_vip_realinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.ssoId != null" >
+        sso_id = #{record.ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="record.realName != null" >
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardNo != null" >
+        id_card_no = #{record.idCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardFront != null" >
+        id_card_front = #{record.idCardFront,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardBack != null" >
+        id_card_back = #{record.idCardBack,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardHand != null" >
+        id_card_hand = #{record.idCardHand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=TINYINT},
+      </if>
+      <if test="record.applyTime != null" >
+        apply_time = #{record.applyTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.auditTime != null" >
+        audit_time = #{record.auditTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.auditUser != null" >
+        audit_user = #{record.auditUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_vip_realinfo
+    set id = #{record.id,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT},
+      sso_id = #{record.ssoId,jdbcType=BIGINT},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      id_card_no = #{record.idCardNo,jdbcType=VARCHAR},
+      id_card_front = #{record.idCardFront,jdbcType=VARCHAR},
+      id_card_back = #{record.idCardBack,jdbcType=VARCHAR},
+      id_card_hand = #{record.idCardHand,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=TINYINT},
+      apply_time = #{record.applyTime,jdbcType=BIGINT},
+      audit_time = #{record.auditTime,jdbcType=BIGINT},
+      audit_user = #{record.auditUser,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yaorange.pojo.TVipRealinfo" >
+    update t_vip_realinfo
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="ssoId != null" >
+        sso_id = #{ssoId,jdbcType=BIGINT},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardNo != null" >
+        id_card_no = #{idCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardFront != null" >
+        id_card_front = #{idCardFront,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardBack != null" >
+        id_card_back = #{idCardBack,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardHand != null" >
+        id_card_hand = #{idCardHand,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="applyTime != null" >
+        apply_time = #{applyTime,jdbcType=BIGINT},
+      </if>
+      <if test="auditTime != null" >
+        audit_time = #{auditTime,jdbcType=BIGINT},
+      </if>
+      <if test="auditUser != null" >
+        audit_user = #{auditUser,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yaorange.pojo.TVipRealinfo" >
+    update t_vip_realinfo
+    set create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      sso_id = #{ssoId,jdbcType=BIGINT},
+      real_name = #{realName,jdbcType=VARCHAR},
+      id_card_no = #{idCardNo,jdbcType=VARCHAR},
+      id_card_front = #{idCardFront,jdbcType=VARCHAR},
+      id_card_back = #{idCardBack,jdbcType=VARCHAR},
+      id_card_hand = #{idCardHand,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      apply_time = #{applyTime,jdbcType=BIGINT},
+      audit_time = #{auditTime,jdbcType=BIGINT},
+      audit_user = #{auditUser,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-CN" class="ie8"> <![endif]-->
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>找回密码 - 易购物-网购首选</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link type="text/css" rel="stylesheet" href="/static/css/common.css">
+		<script type="text/javascript" src="/static/js/jquery.js"></script>
+		<script type="text/javascript" src="/static/js/common.js"></script>
+		<script type="text/javascript" src="/static/js/login.js"></script>
+		<script type="text/javascript" src="/static/js/login.js"></script>
+		<link type="text/css" rel="stylesheet" href="/static/css/login.css">
+		<link type="text/css" rel="stylesheet" href="/static/css/color-style.css" />
+		<script type="text/javascript" src="/static/js/layer.js"></script>
+		<script type="text/javascript" src="/static/js/jquery.method.js"></script>
+		<script type="text/javascript" src="/static/js/placeholder.js"></script>
+		<script type="text/javascript" src="/static/js/jquery.supersized.min.js"></script>
+	</head>
+
+	<body>
+		<div class="header login-header w990">
+			<div class="logo-info">
+				<a href="./" class="logo">
+					<img src="/static/css/mall_logo_0.png" />
+				</a>
+				<span class="findpw">找回密码</span>
+			</div>
+		</div>
+		
+		
+		
+		<div class="forget-content w990">
+		<div class="forget-form">
+			<div class="forget-con">
+				<div class="forget-wrap">
+					<div class="safe-con">
+						<div class="stepflex">
+							<dl class="first  doing ">
+								<dt class="s-num">1</dt>
+								<dd class="s-text">
+									账户名
+									<s></s>
+									<b></b>
+								</dd>
+							</dl>
+							<dl class="normal ">
+								<dt class="s-num">2</dt>
+								<dd class="s-text">
+									验证身份
+									<s></s>
+									<b></b>
+								</dd>
+							</dl>
+							<dl class="normal ">
+								<dt class="s-num">3</dt>
+								<dd class="s-text">
+									设置新密码
+									<s></s>
+									<b></b>
+								</dd>
+							</dl>
+							<dl class="last ">
+								<dt class="s-num">4</dt>
+								<dd class="s-text">
+									完成
+									<s></s>
+									<b></b>
+								</dd>
+							</dl>
+						</div>
+						<form id="AccountModel" class="form-horizontal" name="AccountModel" action="/user/find-password.html" method="post">
+<input type="hidden" name="_csrf" value="TkVvNWJnM1YWPQcCJh94LxsNMGpRMloAGB1aclM2Zix2ASh6DCgLIQ==">
+<!-- 账户名 -->
+<div class="form-group form-group-spe">
+<label for="accountmodel-username" class="input-left">
+<span class="spark">*</span>
+<span>账户名：</span>
+</label>
+<div class="form-control-box">
+
+<input type="text" id="accountmodel-username" class="form-control" name="AccountModel[username]" placeholder="用户名/邮箱/已验证手机">
+
+</div>
+
+<div class="invalid"></div>
+</div>
+<!-- 验证码 -->
+<div class="form-group form-group-spe">
+<label for="accountmodel-captcha" class="input-left">
+<span class="spark">*</span>
+<span>验证码：</span>
+</label>
+<div class="form-control-box">
+
+<input type="text" id="accountmodel-captcha" class="input-small" name="AccountModel[captcha]" placeholder="请输入验证码">
+<label class="captcha">
+	
+	<img id="captcha-image" class="captcha-image" src="/static/img/captcha.html" alt="点击换图" title="点击换图" style="vertical-align: middle; cursor: pointer;"><script data-captcha-id='captcha-image' type='text'>{"refreshUrl":"\/site\/captcha.html?refresh=1","hashKey":"niiCaptcha\/site\/captcha"}</script>
+</label>
+
+</div>
+
+<div class="invalid"></div>
+</div>
+<div class="forget-btn">
+	<div class="form-group form-group-spe">
+<label for="" class="input-left">
+
+
+</label>
+<div class="form-control-box">
+
+	<a href="javascript:void(0);" onclick="document.getElementById('btn_submit').click();" class="btn-img btn-entry bg-color">下一步</a>
+	<div style="display: none;">
+		<input type="submit" id="btn_submit" name="btn_submit" />
+	</div>
+	
+</div>
+
+<div class="invalid"></div>
+</div>
+</div>
+
+</form>
+
+<!-- 验证码脚本 -->
+<script type="text/javascript" src="/static/js/jquery.captcha.js"></script>
+<!-- 表单验证 -->
+<script type="text/javascript" src="/static/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/js/jquery.validate.custom.js"></script>
+<script type="text/javascript" src="/static/js/messages_zh.js"></script>
+<!-- 验证规则 -->
+<script id="client_rules" type="text">
+[{"id": "accountmodel-username", "name": "AccountModel[username]", "attribute": "username", "rules": {"required":true,"messages":{"required":"请输入您的用户名/邮箱/已验证手机"}}},{"id": "accountmodel-captcha", "name": "AccountModel[captcha]", "attribute": "captcha", "rules": {"required":true,"messages":{"required":"请输入验证码"}}},{"id": "accountmodel-captcha", "name": "AccountModel[captcha]", "attribute": "captcha", "rules": {"captcha":{"hash":415,"hashKey":"niiCaptcha/site/captcha","caseSensitive":false},"messages":{"captcha":"验证码不正确。"}}},]
+</script>
+<script type="text/javascript">
+	$().ready(function() {
+		var validator = $("#AccountModel").validate();
+		// 验证规则，此验证规则会影响编辑器中JavaScript的的格式化操作
+		$.validator.addRules($("#client_rules").html());
+		$("#btn_submit").click(function() {
+			if (!validator.form()) {
+				return;
+			}
+			$("#AccountModel").submit();
+		});
+	});
+</script>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+		
+		<!-- 底部 -->
+		<div class="site-footer">
+
+			<div class="footer-desc-copyright">
+
+				<p class="footer-ecscinfo">
+					<a href="#">首页</a>
+					|
+
+					<a href="#">隐私保护</a>
+					|
+
+					<a href="#">联系我们</a>
+					|
+
+					<a href="#">免责条款</a>
+					|
+
+					<a href="#">公司简介</a>
+					|
+
+					<a href="#">意见反馈</a>
+
+					|
+					<a rel="nofollow" target="_blank" href="#">会员登录</a>
+					|
+					<a rel="nofollow" target="_blank" href="http://bbs.yaorange.cn/">会员论坛</a>
+					|
+					<a href="javascript:;" rel="nofollow">客服热线028-86261949</a>
+				</p>
+				<p class="footer-otherlink">
+					<a title="易购商城" target="_blank" href="http://yaorange.cn">易购商城</a>
+
+					|
+
+					<a title="菁鱼课堂" target="_blank" href="http://www.yaorange.cn">菁鱼课堂</a>
+
+					|
+
+					<a title="资讯速递" target="_blank" href="http://www.yaorange.cn">资讯速递</a>
+
+					|
+
+					<a title="快递查询" target="_blank" href="http://m.kuaidi100.com">快递查询</a>
+
+					|
+
+					<a title="论坛" target="_blank" href="http://bbs.yaorange.com/forum.php">会员论坛</a>
+
+					|
+
+					<a title="跟着强哥学JAVA有限公司" target="_blank" href="http://www.yaorange.cn">跟着强哥学JAVA有限公司</a>
+
+				</p>
+
+				<p class="footer-beian"> ICP备案证书号:
+					<a rel="nofollow" target="_blank" href="#">蜀ICP备88888888号-1</a>
+					<a rel="nofollow" target="_blank" href="#"><i></i>蜀公网安备 45323525326664号</a>
+				</p>
+				<p class="footer-Copyright">Copyright &copy; 2017
+					<a target="_blank" style="margin:0;padding:0;" href="http://www.saodangzu.com/">yaorange.cn</a> All Rights Reserved. </p>
+				<p>&nbsp;</p>
+
+				<p class="footer-fp-img">
+					<a target="_blank" href="#"><img src="/static/img/test/kxwz.png"></a>
+					<a target="_blank" href="#"><img src="/static/img/test/smyz.png"></a>
+					<a target="_blank" href="#"><img src="/static/img/test/cxyz.jpg"></a>
+					<a target="_blank" href="#"><img src="/static/img/test/hyyz.png"></a>
+					<a target="_blank" href="#"><img src="/static/img/test/jpfw.png"></a>
+				</p>
+			</div>
+
+		</div>
+		<!-- 底部 _end-->
+		
+		
+		</body>
+
+</html>
